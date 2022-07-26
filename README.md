@@ -14,4 +14,6 @@ ouvrez le fihcier qui se nomme ``` package.json ``` puis ajouter le texte qui su
     "path": "./themes/dark-perso-X.json"
 }
 ```
+
+voici un exemple de comment modifier le fichier ``` package.json ``` 
 ![alt image du fichier package.json](https://github.com/FloRobart/Themes_for_vsCode/blob/main/github_package_modif.png?raw=true)
