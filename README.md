@@ -5,7 +5,7 @@ pour ajouter un des thèmes si dessus il suffit d'aller dans le répertoire suiv
 ```shell
 C:\Users\votre_nom_dutilisateur\.vscode\extensions\github.github-vscode-theme-6.3.2
 ```
-
+  
 ouvrez le fihcier qui se nomme ``` package.json ``` puis ajouter le texte qui suit dans le fichier en remplaçant le ```X``` par le numero du thèmes que vous avez choisie
 
 ```json
@@ -15,7 +15,7 @@ ouvrez le fihcier qui se nomme ``` package.json ``` puis ajouter le texte qui su
     "path": "./themes/dark-perso-X.json"
 }
 ```
-
+  
 
 voici un exemple de comment modifier le fichier ``` package.json ``` afin que l'extention est connaissance du ou des nouveaux thèmes
 ![alt image du fichier package.json](https://github.com/FloRobart/Themes_for_vsCode/blob/main/github_package_modif.png?raw=true)
@@ -26,5 +26,6 @@ pour cela télécharger l'un des thèmes si dessus puis placer les dans le dossi
 ```shell
 C:\Users\votre_nom_dutilisateur\.vscode\extensions\github.github-vscode-theme-6.3.2/themes
 ```
+  
 
 maintenant lancer ou relancer vsCode puis aller dans les paramètres de l'extention "Github theme" puis sélectionnez le thèmes qui vous désirez.
