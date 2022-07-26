@@ -1,4 +1,4 @@
-#thème dark avec du vrai noir (pixel éteint) pour l'extention "Github theme" de vsCode
+##thème dark avec du vrai noir (pixel éteint) pour l'extention "Github theme" de vsCode
 
 pour ajouter un des thèmes si dessus il suffit d'aller dans le répertoire suivant :
 
