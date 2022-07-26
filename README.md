@@ -20,7 +20,7 @@ ouvrez le fihcier qui se nomme ``` package.json ``` puis ajouter le texte qui su
 voici un exemple de comment modifier le fichier ``` package.json ``` afin que l'extention est connaissance du ou des nouveaux thèmes
 ![alt image du fichier package.json](https://github.com/FloRobart/Themes_for_vsCode/blob/main/github_package_modif.png?raw=true)
 
-une fois que c'est fait il faut ajouter le ou les fichiers thèmes qui contiennent toutes les informations des différents éléments de vsCode.
+une fois que c'est fait il faut ajouter le ou les fichiers thèmes qui contiennent toutes les informations des différents éléments de vsCode.  
 pour cela télécharger l'un des thèmes si dessus puis placer les dans le dossier
 
 ```shell
