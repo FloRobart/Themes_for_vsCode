@@ -1,0 +1,6 @@
+# Traitement de texte
+*.docx
+*.doc
+
+# Fichier google drive
+*.ini
