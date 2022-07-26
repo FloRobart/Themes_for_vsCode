@@ -7,9 +7,10 @@ pour ajouter un des thèmes si dessus il suffit d'aller dans C:\Users\votre_nom_
 
 
 
-
+```json
 {
-  "label": "GitHub Dark Perso X",
-  "uiTheme": "vs-dark",
-  "path": "./themes/dark-perso-X.json"
+    "label": "GitHub Dark Perso X",
+    "uiTheme": "vs-dark",
+    "path": "./themes/dark-perso-X.json"
 }
+```
