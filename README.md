@@ -1,8 +1,9 @@
 ﻿thème dark avec du vrai noir (pixel éteint) pour l'extention "Github theme" de vsCode
 
 pour ajouter un des thèmes si dessus il suffit d'aller dans
-```shell
-C:\Users\votre_nom_d'utilisateur\.vscode\extensions\github.github-vscode-theme-6.3.2/themes
+
+```sh
+C:\Users\votre_nom_dutilisateur\.vscode\extensions\github.github-vscode-theme-6.3.2/themes
 ```
 
 
