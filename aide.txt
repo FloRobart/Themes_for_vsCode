@@ -1,0 +1,7 @@
+"editorBracketHighlight.foregroundX"
+X = nb inbrication allant de 1 a 6
+et ceci permet de changer les couleur des paranthese et des accolades de chaque niveau d'imbrication
+
+
+
+violet --> AA00AA
