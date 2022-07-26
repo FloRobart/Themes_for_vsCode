@@ -3,7 +3,7 @@
 pour ajouter un des thèmes si dessus il suffit d'aller dans le répertoire suivant :
 
 ```shell
-C:\Users\votre_nom_dutilisateur\.vscode\extensions\github.github-vscode-theme-6.3.2
+C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-6.3.2
 ```
   
 ouvrez le fihcier qui se nomme ``` package.json ``` puis ajouter le texte qui suit dans le fichier en remplaçant le ```X``` par le numero du thèmes que vous avez choisie
@@ -24,7 +24,7 @@ une fois que c'est fait il faut ajouter le ou les fichiers thèmes qui contienne
 pour cela télécharger l'un des thèmes si dessus puis placer les dans le dossier
 
 ```shell
-C:\Users\votre_nom_dutilisateur\.vscode\extensions\github.github-vscode-theme-6.3.2/themes
+C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-6.3.2/themes
 ```
   
 
