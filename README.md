@@ -1,4 +1,4 @@
-# Thème sombre avec du vrai noir RGB(0,0,0) pour l'extention "Github theme" de VSCode
+# Thème sombre avec du noir RGB(0,0,0) pour l'extension "Github theme" de VSCode
 
 Pour ajouter un des thèmes ci-dessus il suffit d'aller dans le répertoire suivant :
 
@@ -29,3 +29,6 @@ C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-
   
 
 Maintenant lancer ou relancer VSCode puis aller dans les paramètres de l'extension "Github theme" puis sélectionnez le thème que vous désirez.
+
+
+PS : le thème le plus abouti et compatible avec GitHub Copilot est le thème ```Dark perso 3```
