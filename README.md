@@ -24,7 +24,7 @@ Une fois que c'est fait, il faut ajouter le ou les fichiers thèmes qui contienn
 Pour cela, télécharger l'un des thèmes ci-dessus puis placer les dans le dossier.
 
 ```shell
-C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-6.3.2/themes
+C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-6.3.2\themes
 ```
   
 
