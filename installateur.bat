@@ -1,8 +1,8 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-    echo %HOME%
-    IF EXIST "%HOME%\.vscode\" (
+    echo %HomeDrive%%HomePath%
+    IF EXIST "%HomeDrive%%HomePath%\.vscode\extensions\github.github-vscode-theme-*" (
 
     )
 
