@@ -14,7 +14,6 @@ setlocal EnableDelayedExpansion
     )
 
     set "nameFileDest=%HomeDrive%%HomePath%\.vscode\extensions\%nameFolderTheme%\themes\"
-
     SET "pathFilePackageJson=%HomeDrive%%HomePath%\.vscode\extensions\%nameFolderTheme%\package.json"
 
 
