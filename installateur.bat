@@ -49,8 +49,7 @@ goto :eof
 
 :ajoutTheme
     set /a "cpt=1"
-    for /f "skip=1 delims=" %%b in ("%pathFilePackageJson%") do (
-        echo %pathFilePackageJson%
+    for /f "skip=1 delims=" %%b in (' TYPE "!pathFilePackageJson!"') do (
         set /a "cpt+=1"
         if "!cpt!"=="2" ( echo {>"%pathFilePackageJson%" )
 
@@ -70,7 +69,7 @@ goto :eof
 
 :detecteLigneAjout
     set /a "cpt=0"
-    for /f "delims=" %%b in ("%pathFilePackageJson%") do (
+    for /f "delims=" %%b in (' TYPE "%pathFilePackageJson%"') do (
         set /a "cpt+=1"
         echo %%b | findstr "]">nul && ( echo !a! | findstr "}">nul && ( set /a "numLigneModif=!cpt!-1" & goto :eof ))
         set "a=%%b"
