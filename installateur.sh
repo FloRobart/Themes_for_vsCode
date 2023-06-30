@@ -20,10 +20,14 @@ verifVsCodeInstallation()
         then
             echo 'Installation de VsCode...'
             # Installation de VsCode
+
+            return 0
         else
             echo 'VsCode ne sera pas installé'
         fi
     fi
+
+    return 1
 }
 
 #========================#
@@ -82,7 +86,4 @@ installationGithubTheme()
 # Main #
 #======#
 # Vérification de l'installation de vscode
-verifVsCodeInstallation
-
-# Vérification de l'installation du thème Github
-verifGithubThemeInstallation
+verifVsCodeInstallation && verifGithubThemeInstallation
