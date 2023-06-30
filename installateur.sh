@@ -20,6 +20,7 @@ verifVsCodeInstallation()
         then
             echo 'Installation de VsCode...'
             # Installation de VsCode
+            installationVsCode
 
             return 0
         else
@@ -35,7 +36,7 @@ verifVsCodeInstallation()
 #========================#
 installationVsCode()
 {
-    sudo apt update && sudo snap install code --classic && echo 'VsCode est installé' && verifGithubThemeInstallation
+    sudo apt update && sudo snap install code --classic && echo 'VsCode est installé'
 }
 
 
