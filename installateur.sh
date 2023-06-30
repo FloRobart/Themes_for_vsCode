@@ -46,7 +46,7 @@ installationVsCode()
 verifGithubThemeInstallation=$(code --list-extensions | grep 'GitHub.github-vscode-theme' > /dev/null 2>&1 && echo 0 || echo 1)
 verifGithubThemeInstallation()
 {
-    if [ $verifGithubThemeInstallation -ne 0 ]
+    if [ $verifGithubThemeInstallation -ne 0 ] && [ $verifVsCodeInstallation -eq 0 ]
     then
         echo 'Le thème Github n'\''est pas installé'
         echo 'Voulez-vous l'\''installer ? (y/n)'
