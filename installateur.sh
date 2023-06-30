@@ -55,6 +55,7 @@ verifGithubThemeInstallation()
         then
             echo 'Installation du thème Github'
             # Installation du thème Github
+            installationGithubTheme
         else
             echo 'Le thème Github ne sera pas installé'
         fi
