@@ -35,7 +35,7 @@ verifVsCodeInstallation()
 #========================#
 installationVsCode()
 {
-    sudo apt update > /dev/null && ( sudo snap install code --classic > /dev/null && echo 'VsCode est installé' || echo 'Une erreur s'est produite lors de l'installation de VsCode' )
+    sudo apt update && ( sudo snap install code --classic > /dev/null && ( echo 'VsCode est installé' return 0 ) || ( echo 'Une erreur s'est produite lors de l'installation de VsCode' return 1 ))
 }
 
 
