@@ -15,19 +15,19 @@ verifVsCodeInstallation()
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        if [ $reponse = "y" ] || [ $reponse = "Y" ]
+        if [ $reponse = "y" ] || [ $reponse = "Y" ] || [ $reponse = "yes" ] || [ $reponse = "Yes" ] || [ $reponse = "YES" ]
         then
             echo 'Installation de VsCode...'
             # Installation de VsCode
-            installationVsCode
-
-            return 0
+            installationVsCode && return 0 || return 1
         else
             echo 'VsCode ne sera pas installé'
+            return 1
         fi
+    else
+        echo 'VsCode est déjà installé'
+        return 0
     fi
-
-    return 1
 }
 
 #========================#
@@ -35,7 +35,26 @@ verifVsCodeInstallation()
 #========================#
 installationVsCode()
 {
-    sudo apt update && ( sudo snap install code --classic > /dev/null && ( echo 'VsCode est installé' & return 0 ) || ( echo 'Une erreur s'est produite lors de l'installation de VsCode' & return 1 ))
+    sudo apt update && ( sudo snap install code --classic && ( echo 'VsCode est installé' & return 0 ) || ( echo 'Une erreur s'est produite lors de l'installation de VsCode' & return 1 ) )
+}
+
+
+
+#=======================================#
+# Demande d'installation du thème perso #
+#=======================================#
+demandeInstallationThemePerso()
+{
+    echo 'Voulez-vous installer le thème personnalisé ? (y/n)'
+    read reponse
+    if [ $reponse = "y" ] || [ $reponse = "Y" ] || [ $reponse = "yes" ] || [ $reponse = "Yes" ] || [ $reponse = "YES" ]
+    then
+        echo 'Installation du thème personnalisé...'
+        return 0
+    else
+        echo 'Le thème personnalisé ne sera pas installé'
+        return 1
+    fi
 }
 
 
@@ -50,14 +69,18 @@ verifGithubThemeInstallation()
         echo 'Le thème Github n'\''est pas installé'
         echo 'Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        if [ $reponse = "y" ]
+        if [ $reponse = "y" ] || [ $reponse = "Y" ] || [ $reponse = "yes" ] || [ $reponse = "Yes" ] || [ $reponse = "YES" ]
         then
             echo 'Installation du thème Github'
             # Installation du thème Github
-            installationGithubTheme
+            installationGithubTheme && return 0 || return 1
         else
-            echo 'Le thème Github ne sera pas installé'
+            echo 'L'\''extention Github thème ne sera pas installé'
+            return 1
         fi
+    else
+        echo 'L'\''extention Github thème est déjà installé'
+        return 0
     fi
 }
 
@@ -67,7 +90,7 @@ verifGithubThemeInstallation()
 #=============================#
 installationGithubTheme()
 {
-    code --install-extension GitHub.github-vscode-theme > /dev/null && echo 'Le thème Github est installé' || echo 'Une erreur s'est produite lors de l'installation du thème Github'
+    code --install-extension GitHub.github-vscode-theme && ( echo 'Le thème Github à été installé avec succès' & return 0 ) || ( echo 'Une erreur s'est produite lors de l'installation du thème Github' & return 1 )
 }
 
 
@@ -77,6 +100,7 @@ installationGithubTheme()
 copieFichierTheme()
 {
     cp ./Themes/dark-perso.json ~/.vscode/extensions/github.github-vscode-theme-*/themes/dark-perso.json
+    return 0
 }
 
 
@@ -84,6 +108,11 @@ copieFichierTheme()
 #============================================#
 # Ajout du thème au fichier de configuration #
 #============================================#
+ajoutThemeInFichierConfiguration()
+{
+    echo 'Ajout du thème au fichier de configuration'
+    return 0
+}
 
 
 
@@ -91,4 +120,4 @@ copieFichierTheme()
 # Main #
 #======#
 # Vérification de l'installation de vscode
-verifVsCodeInstallation && verifGithubThemeInstallation
+( verifVsCodeInstallation && demandeInstallationThemePerso && verifGithubThemeInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ) && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
