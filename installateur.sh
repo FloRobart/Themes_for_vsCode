@@ -8,9 +8,9 @@
 #==========================================#
 # Vérification de l'installation de vscode #
 #==========================================#
-verifVsCodeInstallation=$(code --version > /dev/null 2>&1 && echo 0 || echo 1)
 verifVsCodeInstallation()
 {
+    verifVsCodeInstallation=$(code --version > /dev/null 2>&1 && echo 0 || echo 1)
     if [ $verifVsCodeInstallation -ne 0 ]
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
@@ -42,9 +42,9 @@ installationVsCode()
 #================================================#
 # Vérification de l'installation de github thème #
 #================================================#
-verifGithubThemeInstallation=$(code --list-extensions | grep 'GitHub.github-vscode-theme' > /dev/null 2>&1 && echo 0 || echo 1)
 verifGithubThemeInstallation()
 {
+    verifGithubThemeInstallation=$(code --list-extensions | grep 'GitHub.github-vscode-theme' > /dev/null 2>&1 && echo 0 || echo 1)
     if [ $verifGithubThemeInstallation -ne 0 ]
     then
         echo 'Le thème Github n'\''est pas installé'
