@@ -13,16 +13,13 @@ verifVsCodeInstallation()
 {
     if [ $verifVsCodeInstallation -ne 0 ]
     then
-        echo 'VsCode n'\''est pas installé'
-        echo 'Voulez-vous l'\''installer ? (y/n)'
+        echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        if [ $reponse = "y" ]
+        if [ $reponse = "y" ] || [ $reponse = "Y" ]
         then
             echo 'Installation de VsCode...'
             # Installation de VsCode
             installationVsCode
-
-            echo 'VsCode est installé 2'
 
             return 0
         else
@@ -38,7 +35,7 @@ verifVsCodeInstallation()
 #========================#
 installationVsCode()
 {
-    sudo apt update && sudo snap install code --classic && echo 'VsCode est installé'
+    sudo apt update && ( sudo snap install code --classic > /dev/null && echo 'VsCode est installé' || echo 'Une erreur s'est produite lors de l'installation de VsCode' )
 }
 
 
@@ -70,13 +67,17 @@ verifGithubThemeInstallation()
 #=============================#
 installationGithubTheme()
 {
-    code --install-extension GitHub.github-vscode-theme
+    code --install-extension GitHub.github-vscode-theme > /dev/null && echo 'Le thème Github est installé' || echo 'Une erreur s'est produite lors de l'installation du thème Github'
 }
 
 
 #=====================================#
 # Copie du fichier contenant le thème #
 #=====================================#
+copieFichierTheme()
+{
+    cp ./Themes/dark-perso.json ~/.vscode/extensions/github.github-vscode-theme-*/themes/dark-perso.json
+}
 
 
 
