@@ -66,8 +66,7 @@ verifGithubThemeInstallation()
     verifGithubThemeInstallation=$(code --list-extensions | grep 'GitHub.github-vscode-theme' > /dev/null 2>&1 && echo 0 || echo 1)
     if [ $verifGithubThemeInstallation -ne 0 ]
     then
-        echo 'Le thème Github n'\''est pas installé'
-        echo 'Voulez-vous l'\''installer ? (y/n)'
+        echo 'L'\''extention Github thème n'\''est pas installé et est obligatoire pour installé le thème personnalisé. Voulez-vous installer l'\''extention ? (y/n)'
         read reponse
         if [ $reponse = "y" ] || [ $reponse = "Y" ] || [ $reponse = "yes" ] || [ $reponse = "Yes" ] || [ $reponse = "YES" ]
         then
@@ -99,8 +98,7 @@ installationGithubTheme()
 #=====================================#
 copieFichierTheme()
 {
-    cp ./Themes/dark-perso.json ~/.vscode/extensions/github.github-vscode-theme-*/themes/dark-perso.json
-    return 0
+    cp ./Themes/dark-perso.json ~/.vscode/extensions/github.github-vscode-theme-*/themes/dark-perso.json && return 0 || return 1
 }
 
 
