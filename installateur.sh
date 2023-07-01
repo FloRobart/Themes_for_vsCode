@@ -89,7 +89,6 @@ verifExtentionGithubInstallation()
 #=============================#
 installationExtentionGithubTheme()
 {
-    #for test in github.copilot-*; do echo $test; done
     code --install-extension GitHub.github-vscode-theme && ( echo 'Le thème Github à été installé avec succès' & return 0 ) || ( echo 'Une erreur s'est produite lors de l'installation du thème Github' & return 1 )
 }
 
@@ -99,7 +98,10 @@ installationExtentionGithubTheme()
 #=====================================#
 copieFichierTheme()
 {
-    cp ./Themes/dark-perso.json ~/.vscode/extensions/github.github-vscode-theme-*/themes/dark-perso.json && return 0 || return 1
+    # récupération de la dernière version de l'extention
+    #for test in github.github-vscode-theme-*; do echo $test; done
+
+    cp ./Themes/dark-perso.json ~/.vscode/extensions/$file/themes/dark-perso.json && return 0 || return 1
 }
 
 
