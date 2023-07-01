@@ -99,7 +99,7 @@ installationExtentionGithubTheme()
 copieFichierTheme()
 {
     # récupération de la dernière version de l'extention
-    #for test in github.github-vscode-theme-*; do echo $test; done
+    #for file in github.github-vscode-theme-*; do echo $file; done
 
     cp ./Themes/dark-perso.json ~/.vscode/extensions/$file/themes/dark-perso.json && return 0 || return 1
 }
