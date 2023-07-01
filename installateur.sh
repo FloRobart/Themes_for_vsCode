@@ -99,7 +99,7 @@ installationExtentionGithubTheme()
 copieFichierTheme()
 {
     # récupération de la dernière version de l'extention
-    ensFile=( $(ls -d github.github-vscode-theme-*) )
+    ensFile=( $(ls -d ~/.vscode/extensions/github.github-vscode-theme-*) )
     # print all elements
     echo \'${ensFile[@]}\'
 
