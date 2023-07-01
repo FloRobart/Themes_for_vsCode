@@ -99,9 +99,13 @@ installationExtentionGithubTheme()
 copieFichierTheme()
 {
     # récupération de la dernière version de l'extention
-    #for file in github.github-vscode-theme-*; do echo $file; done
+    ensFile=( $(ls -d github.github-vscode-theme-*) )
+    # print all elements
+    echo ${ensFile[@]}
 
-    cp ./Themes/dark-perso.json ~/.vscode/extensions/$file/themes/dark-perso.json && return 0 || return 1
+    #for FILE in github.github-vscode-theme-*; do echo $FILE; done
+
+    #cp ./Themes/dark-perso.json ~/.vscode/extensions/$file/themes/dark-perso.json && return 0 || return 1
 }
 
 
@@ -121,4 +125,9 @@ ajoutThemeInFichierConfiguration()
 # Main #
 #======#
 # Vérification de l'installation de vscode
-( verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ) && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
+
+# test
+copieFichierTheme
+
+# commande main final
+#( verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ) && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
