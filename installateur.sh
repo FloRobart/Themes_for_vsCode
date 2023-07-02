@@ -103,7 +103,39 @@ copieFichierTheme()
     ensFile=($(ls -d ./Tests/github.github-vscode-theme-*))
     IFS=$'\n' ensFile=($(sort <<<"${ensFile[*]}")); unset IFS
 
+    i=0
+    for value in "${ensFile[@]}"
+    do
+        # Séparation des versions
+        version[$i]=$(echo $value | sed 's/.*-//' | sed 's/\.//' | sed 's/\.//')
+        ((i++))
+    done
 
+    printf '%s, ' "${version[@]}"
+    echo -e
+
+    # mise de toute les versions sur le même nombre de chiffre
+    IFS=$'\n' version=($(sort -n <<<"${version[*]}")); unset IFS
+
+    nbChiffre=${version[ ${#version[@]}-1 ]}
+    i=0
+    for value in "${version[@]}"
+    do
+        if [ $nbChiffre -ne $value ]
+        then
+            version[$i]=${version[$i]}0
+        fi
+        ((i++))
+    done
+
+    IFS=$'\n' version=($(sort -n <<<"${version[*]}")); unset IFS
+
+    printf '%s, ' "${version[@]}"
+    echo -e
+
+    # Récupération du fichier avec le bon numéro de version
+
+: << 'END'
     #---------------------------------------------------#
     # récupération des versions des extentions trouvées #
     #---------------------------------------------------#
@@ -179,7 +211,7 @@ copieFichierTheme()
 
     IFS=$'\n' patchSorted=($(sort -n <<<"${patch[*]}")); unset IFS
 
-    i=0
+    ((i=0))
     lastPatch=${patchSorted[ ${#patchSorted[@]}-1 ]} # dernière version patch
     for value in "${patch[@]}"
     do
@@ -217,6 +249,8 @@ copieFichierTheme()
     # copie du fichier dans le dossier .vscode #
     #------------------------------------------#
     #cp ./Themes/dark-perso.json ~/.vscode/extensions/$finalFile/themes/dark-perso.json && return 0 || return 1
+
+END
 }
 
 
