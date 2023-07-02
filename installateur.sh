@@ -99,13 +99,124 @@ installationExtentionGithubTheme()
 copieFichierTheme()
 {
     # récupération de la dernière version de l'extention
-    ensFile=( $(ls -d ~/.vscode/extensions/github.github-vscode-theme-*) )
-    # print all elements
-    echo \'${ensFile[@]}\'
+    # ~/.vscode/extensions/
+    ensFile=($(ls -d ./Tests/github.github-vscode-theme-*))
+    IFS=$'\n' ensFile=($(sort <<<"${ensFile[*]}")); unset IFS
 
-    #for FILE in github.github-vscode-theme-*; do echo $FILE; done
 
-    #cp ./Themes/dark-perso.json ~/.vscode/extensions/$file/themes/dark-perso.json && return 0 || return 1
+    #---------------------------------------------------#
+    # récupération des versions des extentions trouvées #
+    #---------------------------------------------------#
+    i=0
+    for value in "${ensFile[@]}"
+    do
+        # Séparation des versions (majeur, mineur, patch)
+        version=$(echo $value | sed 's/.*-//')
+        majeur[$i]=$(echo $version | sed 's/\.[0-9]*\.[0-9]*$//') # version majeur
+        mineur[$i]=$(echo $version | sed 's/^[0-9]*\.//' | sed 's/\.[0-9]*$//') # version mineur
+        patch[$i]=$(echo $version | sed 's/^[0-9]*\.[0-9]*\.//') # patch
+
+        #echo $version ' --> ' ${majeur[$i]}, ${mineur[$i]}, ${patch[$i]}
+        ((i++))
+    done
+
+
+    #---------------------------------------------#
+    # Suppression des versions les moins récentes #
+    #---------------------------------------------#
+    IFS=$'\n' majeurSorted=($(sort -n <<<"${majeur[*]}")); unset IFS
+
+    printf '%s, ' "${majeur[@]}"
+    echo -e
+    printf '%s, ' "${mineur[@]}"
+    echo -e
+    printf '%s, ' "${patch[@]}"
+    echo -e "\n"
+
+    i=0
+    lastMajeur=${majeurSorted[ ${#majeurSorted[@]}-1 ]} # dernière version majeur
+    for value in "${majeur[@]}"
+    do
+        if [ $value -ne $lastMajeur ]
+        then
+            unset majeur[$i]
+            unset mineur[$i]
+            unset patch[$i]
+        fi
+        ((i++))
+    done
+
+    echo 'Version majeur :'
+    printf '%d, ' "${majeur[@]}"
+    echo -e
+    printf '%d, ' "${mineur[@]}"
+    echo -e
+    printf '%d, ' "${patch[@]}"
+    echo -e "\n"
+
+    IFS=$'\n' mineurSorted=($(sort -n <<<"${mineur[*]}")); unset IFS
+
+    i=0
+    lastMineur=${mineurSorted[ ${#mineurSorted[@]}-1 ]} # dernière version mineur
+    for value in "${mineur[@]}"
+    do
+        if [ $value -ne $lastMineur ]
+        then
+            unset majeur[$i]
+            unset mineur[$i]
+            unset patch[$i]
+        fi
+        ((i++))
+    done
+
+    echo 'Version mineur :'
+    printf '%d, ' "${majeur[@]}"
+    echo -e
+    printf '%d, ' "${mineur[@]}"
+    echo -e
+    printf '%d, ' "${patch[@]}"
+    echo -e "\n"
+
+    IFS=$'\n' patchSorted=($(sort -n <<<"${patch[*]}")); unset IFS
+
+    i=0
+    lastPatch=${patchSorted[ ${#patchSorted[@]}-1 ]} # dernière version patch
+    for value in "${patch[@]}"
+    do
+        if [ $value -ne $lastPatch ]
+        then
+            unset majeur[$i]
+            unset mineur[$i]
+            unset patch[$i]
+        fi
+        ((i++))
+    done
+
+    echo 'Version patch :'
+    printf '%d, ' "${majeur[@]}"
+    echo -e
+    printf '%d, ' "${mineur[@]}"
+    echo -e
+    printf '%d, ' "${patch[@]}"
+    echo -e "\n"
+
+
+    #-------------------------------------#
+    # récupération de la dernière version #
+    #-------------------------------------#
+
+
+
+    #--------------------------------#
+    # récupération du nom du fichier #
+    #--------------------------------#
+
+
+
+    #------------------------------------------#
+    # copie du fichier dans le dossier .vscode #
+    #------------------------------------------#
+    #cp ./Themes/dark-perso.json ~/.vscode/extensions/$finalFile/themes/dark-perso.json && return 0 || return 1
 }
 
 
