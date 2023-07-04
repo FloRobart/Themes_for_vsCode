@@ -104,50 +104,39 @@ function copieFichierTheme()
     ensFiles=($(ls -d ./Tests/github.github-vscode-theme-*))
     IFS=$'\n' ensFiles=($(sort <<<"${ensFiles[*]}")); unset IFS
 
+    # Séparation du nom et des numéros versions
     i=0
     for value in "${ensFiles[@]}"
     do
-        # Séparation des versions
         versions[$i]=$(echo $value | sed 's/.*-//')
         versions[$i]=$(retirePoint ${versions[$i]})
         ((i++))
     done
 
-    printf '%s, ' "${versions[@]}"
-    echo -e
-
     # mise de toute les versions sur le même nombre de chiffre
     IFS=$'\n' versionsTrie=($(sort -n <<<"${versions[*]}")); unset IFS
-    nbChiffre=${versionsTrie[ ${#versions[@]}-1 ]}
+    nbChiffre=${versionsTrie[ ${#versions[@]}-1 ]} ; nbChiffre=${#nbChiffre}
     i=0
     for value in "${versionsTrie[@]}"
     do
-        [[ $nbChiffre -ne $value ]] && versionsTrie[$i]="${versionsTrie[$i]}"'0'
+        [[ $nbChiffre -ne ${#value} ]] && versionsTrie[$i]="${versionsTrie[$i]}"'0'
         ((i++))
     done
 
+    # récupération de la dernière version
     IFS=$'\n' versionsTrie=($(sort -n <<<"${versionsTrie[*]}")); unset IFS
-
     lastVersion=${versionsTrie[ ${#versions[@]}-1 ]}
 
-    printf '%s, ' "${versionsTrie[@]}"
-    echo -e
-    echo 'dernière version --> '"$lastVersion"
-
-    # récupération du nom du dossier le plus récent
+    # récupération du nom du dossier correspondant à la dernière version
     getFolderNameLastversion
 
-    [[ -z $lastFolder ]] && { lastVersion=$( sed 's/0$//' <<<"$lastVersion" ) ; getFolderNameLastversion ; }
-    
-    echo 'dernière version --> '"$lastVersion"
-
-    echo 'dossier de la dernière version --> '"$lastFolder"
+    [[ -z $lastFolder ]] && { lastVersion=$( sed 's/0$//' <<<"${lastVersion}" ) ; getFolderNameLastversion ; }
+    lastFolder=$(sed 's/.*\///' <<<"${lastFolder}")
 
     #-------------------------------------#
     # Copie du fichier contenant le thème #
     #-------------------------------------#
-    echo 'Copie du fichier contenant le thème'
-    cp "./Themes/dark-perso.json" "~/.vscode/extensions/$lastFolder/themes/dark-perso.json"
+    #cp "./Themes/dark-perso.json" "~/.vscode/extensions/$lastFolder/themes/dark-perso.json"
 }
 
 function getFolderNameLastversion()
