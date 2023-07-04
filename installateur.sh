@@ -175,9 +175,5 @@ function ajoutThemeInFichierConfiguration()
 #======#
 # Vérification de l'installation de vscode
 
-# test
-verifExtentionGithubInstallation
-copieFichierTheme
-
 # commande main final
-#( verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ) && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
+( verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ) && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
