@@ -158,9 +158,9 @@ function ajoutThemeInFichierConfiguration()
 # Vérification de l'installation de vscode
 
 # commande main final
-verifVsCodeInstallation && { echo 'Visual studio Code est déjà installé' ; vsCodeInstall=0 ; } || { echo 'Visual studio Code ne sera pas installé' ; }
+verifVsCodeInstallation && { echo 'Visual studio Code est déjà installé' ; vsCodeInstall=0 ; } || { echo 'Visual studio Code ne sera pas installé' ; vsCodeInstall=1 ; }
 
-if [[ -z $vsCodeInstall ]]
+if [[ $vsCodeInstall -eq 0 ]]
 then
     echo 'test 2'
     if demandeInstallationThemePerso
