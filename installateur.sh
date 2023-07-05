@@ -35,7 +35,7 @@ function verifVsCodeInstallation()
 #========================#
 function installationVsCode()
 {
-    sudo apt update && { sudo snap install code --classic && { echo 'VsCode est installé' ; return 0 ; } || { echo 'Une erreur s'est produite lors de l'installation de VsCode' ; return 1 ; } }
+    sudo apt update && { sudo snap install code --classic && { echo 'VsCode à été installé' ; return 0 ; } || { echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode' ; return 1 ; } } || { echo 'Une erreur s'\''est produite lors de l'\''update du gestionnaire de paquet apt' ; return 1 ; }
 }
 
 
@@ -47,7 +47,7 @@ function demandeInstallationThemePerso()
 {
     echo 'Voulez-vous installer le thème personnalisé ? (y/n)'
     read reponse
-    [[ ${reponse} =~ ^y(es)?$ ]] && { echo 'Installation du thème personnalisé...' ; return 0 ; } || { echo 'Le thème personnalisé ne sera pas installé' ; return 0 ; }
+    [[ ${reponse} =~ ^y(es)?$ ]] && { echo 'Installation du thème personnalisé...' ; return 0 ; } || { echo 'Le thème personnalisé ne sera pas installé' ; return 1 ; }
 }
 
 
@@ -68,7 +68,7 @@ function verifExtentionGithubInstallation()
             installationExtentionGithubTheme && return 0 || return 1
         else
             echo 'L'\''extention Github thème ne sera pas installé'
-            return 0
+            return 1
         fi
     else
         echo 'L'\''extention Github thème est déjà installé'
@@ -82,7 +82,7 @@ function verifExtentionGithubInstallation()
 #=============================#
 function installationExtentionGithubTheme()
 {
-    code --install-extension GitHub.github-vscode-theme && { echo 'Le thème Github à été installé avec succès' ; return 0 ; } || { echo 'Une erreur s'est produite lors de l'installation du thème Github' ; return 1 ; }
+    code --install-extension GitHub.github-vscode-theme && { echo 'Le thème Github à été installé avec succès' ; return 0 ; } || return 1
 }
 
 
@@ -122,14 +122,13 @@ function copieFichierTheme()
 
     # récupération du nom du dossier correspondant à la dernière version
     getFolderNameLastversion
-
     [[ -z $lastFolder ]] && { lastVersion=$( sed 's/0$//' <<<"${lastVersion}" ) ; getFolderNameLastversion ; }
     lastFolder=$(sed 's/.*\///' <<<"${lastFolder}")
 
     #-------------------------------------#
     # Copie du fichier contenant le thème #
     #-------------------------------------#
-    #cp "./Themes/dark-perso.json" "~/.vscode/extensions/$lastFolder/themes/dark-perso.json"
+    cp "./Themes/dark-perso.json" "~/.vscode/extensions/$lastFolder/themes/dark-perso.json"
 }
 
 function getFolderNameLastversion()
@@ -172,12 +171,54 @@ function ajoutThemeInFichierConfiguration()
 if verifVsCodeInstallation
 then
     echo 'VsCode est déjà installé'
+    if demandeInstallationThemePerso
+    then
+        echo 'Installation du thème personnalisé...'
+        if verifExtentionGithubInstallation
+        then
+            echo 'copie du fichier contenant le thème'
+            if copieFichierTheme
+            then
+                echo 'Ajout du thème au fichier de configuration'
+                if ajoutThemeInFichierConfiguration
+                then
+                    echo 'Installation réussi'
+                else
+                    echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
+                fi
+            else
+                echo 'Une erreur s'\''est produite lors de la copie du fichier contenant le thème'
+            fi
+        else
+            echo 'Une erreur s'\''est produite lors de l'\''installation de l'\''extention Github thème'
+        fi
+    else
+        echo 'Le thème personnalisé ne sera pas installé'
+    fi
 else
     echo 'VsCode n'\''est pas installé'
+    if demandeInstallationThemePerso
+    then
+        echo 'Installation du thème personnalisé...'
+        if verifExtentionGithubInstallation
+        then
+            echo 'copie du fichier contenant le thème'
+            if copieFichierTheme
+            then
+                echo 'Ajout du thème au fichier de configuration'
+                if ajoutThemeInFichierConfiguration
+                then
+                    echo 'Installation réussi'
+                else
+                    echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
+                fi
+            else
+                echo 'Une erreur s'\''est produite lors de la copie du fichier contenant le thème'
+            fi
+        else
+            echo 'Une erreur s'\''est produite lors de l'\''installation de l'\''extention Github thème'
+        fi
+    else
+        echo 'Le thème personnalisé ne sera pas installé'
+    fi
 fi
-
-exit 0
-
-
-
-{ verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ; } && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
