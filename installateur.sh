@@ -162,10 +162,10 @@ verifVsCodeInstallation && { echo 'Visual studio Code est déjà installé' ; vs
 
 if [[ $vsCodeInstall -eq 0 ]]
 then
-    echo 'test 2'
     if demandeInstallationThemePerso
     then
         echo 'Installation du thème personnalisé...'
+        exit 0
         if verifExtentionGithubInstallation
         then
             echo 'copie du fichier contenant le thème...'
@@ -185,6 +185,4 @@ then
     else
         echo 'Le thème personnalisé ne sera pas installé'
     fi
-else
-    echo 'Test 1'
 fi
