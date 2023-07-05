@@ -169,14 +169,14 @@ function ajoutThemeInFichierConfiguration()
 # Vérification de l'installation de vscode
 
 # commande main final
-if [ verifVsCodeInstallation -eq 0 ]
+if verifVsCodeInstallation
 then
     echo 'VsCode est déjà installé'
 else
     echo 'VsCode n'\''est pas installé'
 fi
 
-return 0
+exit 0
 
 
 
