@@ -15,19 +15,11 @@ function verifVsCodeInstallation()
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        if [[ ${reponse} =~ ^y(es)?$ ]]
-        then
-            echo 'Installation de VsCode...'
-            # Installation de VsCode
-            installationVsCode && return 0 || return 1
-        else
-            echo 'VsCode ne sera pas installé'
-            return 1
-        fi
-    else
-        echo 'VsCode est déjà installé'
-        return 0
+        [[ ${reponse} =~ ^y(es)?$ ]] && { installationVsCode && return 0 || return 1 ; } || return 1
     fi
+
+    return 0
+    echo test
 }
 
 #========================#
