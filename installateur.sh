@@ -15,11 +15,10 @@ function verifVsCodeInstallation()
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        [[ ${reponse} =~ ^y(es)?$ ]] && { installationVsCode && return 0 || return 1 ; } || return 1
+        [[ ${reponse} =~ ^y(es)?$ ]] && installationVsCode || return 1
     fi
 
     return 0
-    echo test
 }
 
 #========================#
@@ -27,7 +26,7 @@ function verifVsCodeInstallation()
 #========================#
 function installationVsCode()
 {
-    sudo apt update && { sudo snap install code --classic && { echo 'VsCode à été installé' ; return 0 ; } || { echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode' ; return 1 ; } } || { echo 'Une erreur s'\''est produite lors de l'\''update du gestionnaire de paquet apt' ; return 1 ; }
+    sudo apt update && { sudo snap install code --classic && { echo 'VsCode à été installé avec succès' ; return 0 ; } || { echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode' ; return 1 ; } } || { echo 'Une erreur s'\''est produite lors de l'\''update du gestionnaire de paquet apt' ; return 1 ; }
 }
 
 
@@ -39,7 +38,7 @@ function demandeInstallationThemePerso()
 {
     echo 'Voulez-vous installer le thème personnalisé ? (y/n)'
     read reponse
-    [[ ${reponse} =~ ^y(es)?$ ]] && { echo 'Installation du thème personnalisé...' ; return 0 ; } || { echo 'Le thème personnalisé ne sera pas installé' ; return 1 ; }
+    return $([[ ${reponse} =~ ^y(es)?$ ]])
 }
 
 
@@ -55,11 +54,10 @@ function verifExtentionGithubInstallation()
         read reponse
         if [[ ${reponse} =~ ^y(es)?$ ]]
         then
-            echo 'Installation du thème Github'
+            echo 'Installation du thème Github...'
             # Installation de l'extention Github thème
-            installationExtentionGithubTheme && return 0 || return 1
+            installationExtentionGithubTheme && return 0 || { echo 'Une erreur est survenue lors de l'\''installation de l'\''extention Github thème' ; return 1 ; }
         else
-            echo 'L'\''extention Github thème ne sera pas installé'
             return 1
         fi
     else
@@ -160,15 +158,16 @@ function ajoutThemeInFichierConfiguration()
 # Vérification de l'installation de vscode
 
 # commande main final
-if verifVsCodeInstallation
+verifVsCodeInstallation && { echo 'Visual studio Code est déjà installé' ; vsCodeInstall=0 ; } || echo 'Visual studio Code ne sera pas installé'
+
+if [[ -z $vsCodeInstall ]]
 then
-    echo 'VsCode est déjà installé'
     if demandeInstallationThemePerso
     then
         echo 'Installation du thème personnalisé...'
         if verifExtentionGithubInstallation
         then
-            echo 'copie du fichier contenant le thème'
+            echo 'copie du fichier contenant le thème...'
             if copieFichierTheme
             then
                 echo 'Ajout du thème au fichier de configuration'
@@ -181,34 +180,6 @@ then
             else
                 echo 'Une erreur s'\''est produite lors de la copie du fichier contenant le thème'
             fi
-        else
-            echo 'Une erreur s'\''est produite lors de l'\''installation de l'\''extention Github thème'
-        fi
-    else
-        echo 'Le thème personnalisé ne sera pas installé'
-    fi
-else
-    echo 'VsCode n'\''est pas installé'
-    if demandeInstallationThemePerso
-    then
-        echo 'Installation du thème personnalisé...'
-        if verifExtentionGithubInstallation
-        then
-            echo 'copie du fichier contenant le thème'
-            if copieFichierTheme
-            then
-                echo 'Ajout du thème au fichier de configuration'
-                if ajoutThemeInFichierConfiguration
-                then
-                    echo 'Installation réussi'
-                else
-                    echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
-                fi
-            else
-                echo 'Une erreur s'\''est produite lors de la copie du fichier contenant le thème'
-            fi
-        else
-            echo 'Une erreur s'\''est produite lors de l'\''installation de l'\''extention Github thème'
         fi
     else
         echo 'Le thème personnalisé ne sera pas installé'
