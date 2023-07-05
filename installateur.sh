@@ -15,7 +15,7 @@ function verifVsCodeInstallation()
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        if [[ $answer =~ ^y(es)?$ ]]
+        if [[ ${reponse} =~ ^y(es)?$ ]]
         then
             echo 'Installation de VsCode...'
             # Installation de VsCode
@@ -68,7 +68,7 @@ function verifExtentionGithubInstallation()
     then
         echo 'L'\''extention Github thème n'\''est pas installé et est obligatoire pour installé le thème personnalisé. Voulez-vous installer l'\''extention ? (y/n)'
         read reponse
-        if [[ $answer =~ ^y(es)?$ ]]
+        if [[ ${reponse} =~ ^y(es)?$ ]]
         then
             echo 'Installation du thème Github'
             # Installation de l'extention Github thème
@@ -176,4 +176,4 @@ function ajoutThemeInFichierConfiguration()
 # Vérification de l'installation de vscode
 
 # commande main final
-( verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ) && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
+{ verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ; } && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
