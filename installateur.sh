@@ -47,14 +47,7 @@ function demandeInstallationThemePerso()
 {
     echo 'Voulez-vous installer le thème personnalisé ? (y/n)'
     read reponse
-    if [[ ${reponse} =~ ^y(es)?$ ]]
-    then
-        echo 'Installation du thème personnalisé...'
-        return 0
-    else
-        echo 'Le thème personnalisé ne sera pas installé'
-        return 1
-    fi
+    [[ ${reponse} =~ ^y(es)?$ ]] && { echo 'Installation du thème personnalisé...' ; return 0 ; } || { echo 'Le thème personnalisé ne sera pas installé' ; return 0 ; }
 }
 
 
@@ -75,7 +68,7 @@ function verifExtentionGithubInstallation()
             installationExtentionGithubTheme && return 0 || return 1
         else
             echo 'L'\''extention Github thème ne sera pas installé'
-            return 1
+            return 0
         fi
     else
         echo 'L'\''extention Github thème est déjà installé'
@@ -176,4 +169,15 @@ function ajoutThemeInFichierConfiguration()
 # Vérification de l'installation de vscode
 
 # commande main final
+if [ verifVsCodeInstallation -eq 0 ]
+then
+    echo 'VsCode est déjà installé'
+else
+    echo 'VsCode n'\''est pas installé'
+fi
+
+return 0
+
+
+
 { verifVsCodeInstallation && demandeInstallationThemePerso && verifExtentionGithubInstallation && copieFichierTheme && ajoutThemeInFichierConfiguration ; } && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de l'\''installation'
