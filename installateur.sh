@@ -47,7 +47,7 @@ function demandeInstallationThemePerso()
 {
     echo 'Voulez-vous installer le thème personnalisé ? (y/n)'
     read reponse
-    if [[ ${reponse} =~ '^y(es)?$' ]]
+    if [[ ${reponse} =~ ^y(es)?$ ]]
     then
         echo 'Installation du thème personnalisé...'
         return 0
