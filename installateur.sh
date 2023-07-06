@@ -171,7 +171,7 @@ then
             echo 'copie du fichier contenant le thème...'
             if copieFichierTheme
             then
-                echo 'Ajout du thème au fichier de configuration'
+                echo 'Ajout du thème au fichier de configuration...'
                 if ajoutThemeInFichierConfiguration
                 then
                     echo 'Installation réussi'
