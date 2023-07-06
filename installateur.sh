@@ -148,6 +148,7 @@ function retirePoint()
 #============================================#
 function ajoutThemeInFichierConfiguration()
 {
+    #TODO : à faire
     echo 'entrer dans la méthode ajoutThemeInFichierConfiguration'
     return 0
 }
