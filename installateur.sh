@@ -152,7 +152,6 @@ function ajoutThemeInFichierConfiguration()
     packageFile='/home/'"$USER"'/.vscode/extensions/'"$lastFolder"'/package.json'
     packageFile2='/home/'"$USER"'/.vscode/extensions/'"$lastFolder"'/package2.json'
     sed "s/\"themes\": \[/\"themes\": \[\n\t\t\t{\n\t\t\t\t$configTheme\n\t\t\t},/" $packageFile > $packageFile2 && return 0 || return 1
-    cp $packageFile2 $packageFile
 }
 
 
@@ -174,7 +173,7 @@ then
                 echo 'Ajout du thème au fichier de configuration...'
                 if ajoutThemeInFichierConfiguration
                 then
-                    echo 'Installation réussi'
+                    mv $packageFile2 $packageFile && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
                 else
                     echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
                 fi
