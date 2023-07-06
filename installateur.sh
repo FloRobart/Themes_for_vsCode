@@ -118,7 +118,7 @@ function copieFichierTheme()
     #-------------------------------------#
     # Copie du fichier contenant le thème #
     #-------------------------------------#
-    sudo cp "./Themes/dark-perso.json" "~/.vscode/extensions/$lastFolder/themes/dark-perso.json"
+    sudo cp "./Themes/dark-perso.json" "~/.vscode/extensions/$lastFolder/themes/"
 }
 
 function getFolderNameLastversion()
