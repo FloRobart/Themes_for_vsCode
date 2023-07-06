@@ -15,7 +15,9 @@ function verifVsCodeInstallation()
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        [[ ${reponse} =~ ^y(es)?$ ]] && installationVsCode || return 1
+        [[ ${reponse} =~ ^y(es)?$ ]] && { installationVsCode || { erreur=0 ; return 1 ; }; } || { echo 'Visual studio Code ne sera pas installé' ; erreur=1 ; return 1 ; }
+    else
+        echo 'Visual studio Code est déjà installé'
     fi
 
     return 0
@@ -158,9 +160,7 @@ function ajoutThemeInFichierConfiguration()
 # Vérification de l'installation de vscode
 
 # commande main final
-verifVsCodeInstallation && { echo 'Visual studio Code est déjà installé' ; vsCodeInstall=0 ; } || { echo 'Visual studio Code ne sera pas installé' ; vsCodeInstall=1 ; }
-
-if [[ $vsCodeInstall -eq 0 ]]
+if verifVsCodeInstallation
 then
     if demandeInstallationThemePerso
     then
@@ -183,5 +183,10 @@ then
         fi
     else
         echo 'Le thème personnalisé ne sera pas installé'
+    fi
+else
+    if [ $erreur -eq 0 ]
+    then
+        echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode'
     fi
 fi
