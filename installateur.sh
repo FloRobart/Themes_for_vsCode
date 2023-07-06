@@ -59,7 +59,7 @@ function verifExtentionGithubInstallation()
             echo 'Installation d'\''extention Github thème...'
             installationExtentionGithubTheme && { echo 'Le thème Github à été installé avec succès' ; return 0 ; } || { echo 'Une erreur est survenue lors de l'\''installation de l'\''extention Github thème' ; return 1 ; }
         else
-            echo 'L'\''extention Github thème ne sera pas installé'
+            echo 'L'\''extention Github thème ainsi que le thème lui même ne seront pas installé'
             return 1
         fi
     else
