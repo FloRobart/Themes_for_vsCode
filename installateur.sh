@@ -84,7 +84,7 @@ function copieFichierTheme()
     #----------------------------------------------------#
     # récupération de la dernière version de l'extention #
     #----------------------------------------------------#
-    ensFiles=($(ls -d ./Tests/github.github-vscode-theme-*))
+    ensFiles=($(ls -d ~/.vscode/extensions/github.github-vscode-theme-*))
     IFS=$'\n' ensFiles=($(sort <<<"${ensFiles[*]}")); unset IFS
 
     # Séparation du nom et des numéros versions
