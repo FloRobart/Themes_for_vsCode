@@ -54,10 +54,10 @@ function verifExtentionGithubInstallation()
         read reponse
         if [[ ${reponse} =~ ^y(es)?$ ]]
         then
-            echo 'Installation du thème Github...'
-            # Installation de l'extention Github thème
-            installationExtentionGithubTheme && return 0 || { echo 'Une erreur est survenue lors de l'\''installation de l'\''extention Github thème' ; return 1 ; }
+            echo 'Installation d'\''extention Github thème...'
+            installationExtentionGithubTheme && { echo 'Le thème Github à été installé avec succès' ; return 0 ; } || { echo 'Une erreur est survenue lors de l'\''installation de l'\''extention Github thème' ; return 1 ; }
         else
+            echo 'L'\''extention Github thème ne sera pas installé'
             return 1
         fi
     else
@@ -72,7 +72,7 @@ function verifExtentionGithubInstallation()
 #=============================#
 function installationExtentionGithubTheme()
 {
-    code --install-extension GitHub.github-vscode-theme && { echo 'Le thème Github à été installé avec succès' ; return 0 ; } || return 1
+    code --install-extension GitHub.github-vscode-theme && return 0 || return 1
 }
 
 
@@ -146,7 +146,7 @@ function retirePoint()
 #============================================#
 function ajoutThemeInFichierConfiguration()
 {
-    echo 'Ajout du thème au fichier de configuration'
+    echo 'entrer dans la méthode ajoutThemeInFichierConfiguration'
     return 0
 }
 
@@ -165,7 +165,6 @@ then
     if demandeInstallationThemePerso
     then
         echo 'Installation du thème personnalisé...'
-        exit 0
         if verifExtentionGithubInstallation
         then
             echo 'copie du fichier contenant le thème...'
