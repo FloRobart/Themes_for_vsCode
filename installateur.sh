@@ -158,7 +158,13 @@ function ajoutThemeInFichierConfiguration()
 #======#
 # Main #
 #======#
-# Vérification de l'installation de vscode
+# Test
+
+sed "s/première ligne//" ./Tests/fichier.txt
+
+
+
+exit 0
 
 # commande main final
 if verifVsCodeInstallation
