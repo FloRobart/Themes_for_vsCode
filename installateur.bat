@@ -80,34 +80,39 @@ goto :EOF
 ::======::
 :: Main ::
 ::======::
+:: Test
+echo "code erreur : %ERRORLEVEL%"
+echo "code succes : %SUCCES%"
+
+exit /b
+
 :: commande main final
-if verifVsCodeInstallation
-then
-    if demandeInstallationThemePerso
-    then
-        echo 'Installation du thème personnalisé...'
-        if verifExtentionGithubInstallation
-        then
-            echo 'copie du fichier contenant le thème...'
-            if copieFichierTheme
-            then
-                echo 'Ajout du thème au fichier de configuration...'
-                if ajoutThemeInFichierConfiguration
-                then
-                    mv $packageFile2 $packageFile && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
-                else
-                    echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
-                fi
-            else
-                echo 'Une erreur s'\''est produite lors de la copie du fichier contenant le thème'
-            fi
-        fi
-    else
-        echo 'Le thème personnalisé ne sera pas installé'
-    fi
-else
-    if [ $erreur -eq 0 ]
-    then
-        echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode'
-    fi
-fi
+call :verifVsCodeInstallation
+if %verifVsCodeInstallation% (
+    call :demandeInstallationThemePerso
+    if %demandeInstallationThemePerso% (
+        echo "Installation du thème personnalisé..."
+        call :verifExtentionGithubInstallation
+        if %verifExtentionGithubInstallation% (
+            echo "copie du fichier contenant le thème..."
+            call :copieFichierTheme
+            if %copieFichierTheme% (
+                echo "Ajout du thème au fichier de configuration..."
+                call :ajoutThemeInFichierConfiguration
+                if %ajoutThemeInFichierConfiguration% (
+                    mv $packageFile2 $packageFile && echo "Installation réussi" || echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+                ) else (
+                    echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+                )
+            ) else (
+                echo "Une erreur s'est produite lors de la copie du fichier contenant le thème"
+            )
+        )
+    ) else (
+        echo "Le thème personnalisé ne sera pas installé"
+    )
+) else (
+    if %erreur% EQU 0 (
+        echo "Une erreur s'est produite lors de l'installation de VsCode"
+    )
+)
