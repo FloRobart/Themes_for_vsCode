@@ -4,7 +4,9 @@
 
 ## Installation
 
-### Avec le script d'installation
+### Linux
+
+#### Avec le script d'installation
 
 - Cloner le repertoire Github :
 
@@ -26,7 +28,7 @@
 
 - Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de vscode
 
-### Manuellement
+#### Manuellement
 
 - Assurez vous d'avoir installé l'extension Github thème qui à comme ID :
 
@@ -84,3 +86,21 @@
       ...
   }
   ```
+
+### Windows
+
+#### Avec le script d'installation
+
+- Cloner le repertoire Github :
+
+  ```batch
+  git clone https://github.com/FloRobart/Themes_for_vsCode.git
+  ```
+
+- Executer la script :
+
+  ```batch
+  ./installateur.sh
+  ```
+
+#### Manuellement
