@@ -5,7 +5,7 @@
 ::======::
 :: Test
 echo "code erreur : %ERRORLEVEL%"
-echo "code succes : %SUCCES%"
+echo "code succes : %SUCCESLEVEL%"
 
 exit /b
 
