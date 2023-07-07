@@ -7,6 +7,20 @@
 echo "code erreur : %ERRORLEVEL%"
 echo "code succes : %SUCCESLEVEL%"
 
+set /a "test=0"
+
+if %test% (
+    echo "true"
+) else (
+    echo "false"
+)
+
+%test% && (
+    echo "true"
+) || (
+    echo "false"
+)
+
 exit /b
 
 :: commande main final
