@@ -1,34 +1,86 @@
-# Thème sombre avec du noir RGB(0,0,0) pour l'extension "Github theme" de VSCode
+# Thème sombre avec un fond noir rgb(0,0,0) pour Visual Studio Code
 
-Pour ajouter un des thèmes ci-dessus il suffit d'aller dans le répertoire suivant :
+## Prévisualisation
 
-```shell
-C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-6.3.2
-```
+## Installation
+
+### Avec le script d'installation
+
+- Cloner le repertoire Github :
+
+  ```shell
+  git clone https://github.com/FloRobart/Themes_for_vsCode.git
+  ```
+
+- Rendre le script executable :
+
+  ```shell
+  chmod +x installateur.sh
+  ```
+
+- Executer la script :
+
+  ```shell
+  ./installateur.sh
+  ```
+
+- Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de vscode
+
+### Manuellement
+
+- Assurez vous d'avoir installé l'extension Github thème qui à comme ID :
+
+> GitHub.github-vscode-theme
+
+- Cloner le repertoire Github :
+
+  ```shell
+  git clone https://github.com/FloRobart/Themes_for_vsCode.git
+  ```
+
+- Copier le thème dans le répertoire des thèmes de vscode :
+
+  ```shell
+  cp "path/to/Themes_for_vsCode/Themes/dark-perso.json" "/home/$USER/.vscode/extensions/github.github-vscode-theme-< version >/themes/dark-perso.json"
+  ```
+
+- Modifier le fichier `package.json` pour y ajouter le nouveau thème
+
+    Ajouter le texte suivant comme dans l'exemple si dessous
+
+  ```json
+  ,
+  {
+      "label": "GitHub Dark Perso",
+      "uiTheme": "vs-dark",
+      "path": "./themes/dark-perso.json"
+  }
+  ```
+
+- Exemple
+
+  ```json
+  {
+      ...
   
-Ouvrez le fichier qui se nomme ``` package.json ``` puis ajouter le texte qui suit dans le fichier en remplaçant le ```X``` par le numero du thème que vous avez choisi.
-
-```json
-{
-    "label": "GitHub Dark Perso X",
-    "uiTheme": "vs-dark",
-    "path": "./themes/dark-perso-X.json"
-}
-```
+      "contributes": {
+          "themes": [
   
-
-Voici un exemple de comment modifier le fichier ``` package.json ``` afin que l'extension aie connaissance du ou des nouveaux thèmes
-![alt image du fichier package.json](https://github.com/FloRobart/Themes_for_vsCode/blob/main/github_package_modif.png?raw=true)
-
-Une fois que c'est fait, il faut ajouter le ou les fichiers thèmes qui contiennent toutes les informations des différents éléments de VSCode.  
-Pour cela, télécharger l'un des thèmes ci-dessus puis placer les dans le dossier.
-
-```shell
-C:\Users\[votre_nom_dutilisateur]\.vscode\extensions\github.github-vscode-theme-6.3.2\themes
-```
+              ...
   
-
-Maintenant lancer ou relancer VSCode puis aller dans les paramètres de l'extension "Github theme" puis sélectionnez le thème que vous désirez.
-
-
-PS : le thème le plus abouti et compatible avec GitHub Copilot est le thème ```Dark perso 3```
+              {
+                  "label": "GitHub Dark",
+                  "uiTheme": "vs-dark",
+                  "path": "./themes/dark.json"
+              },
+              {
+                  "label": "GitHub Dark Perso",
+                  "uiTheme": "vs-dark",
+                  "path": "./themes/dark-perso.json"
+              }
+          ]
+      },
+  
+      ...
+  }
+  ```
