@@ -9,7 +9,7 @@ echo "code succes : %SUCCESLEVEL%"
 
 set /a "test=0"
 
-if %test% EQU 0 (
+if %test% EQU "0" (
     echo "true 1"
 ) else (
     echo "false 1"
