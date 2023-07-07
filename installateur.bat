@@ -3,35 +3,20 @@
 ::======::
 :: Main ::
 ::======::
-:: Test
-echo "code erreur : %ERRORLEVEL%"
-echo "code succes : %SUCCESLEVEL%"
-
-set /a "test=0"
-
-if "%test%" EQU "0" (
-    echo "true 1"
-) else (
-    echo "false 1"
-)
-
-
-exit /b
-
 :: commande main final
 call :verifVsCodeInstallation
-if %verifVsCodeInstallation% (
+if %verifVsCodeInstallation% EQU 0 (
     call :demandeInstallationThemePerso
-    if %demandeInstallationThemePerso% (
+    if %demandeInstallationThemePerso% EQU 0 (
         echo "Installation du thème personnalisé..."
         call :verifExtentionGithubInstallation
-        if %verifExtentionGithubInstallation% (
+        if %verifExtentionGithubInstallation% EQU 0 (
             echo "copie du fichier contenant le thème..."
             call :copieFichierTheme
-            if %copieFichierTheme% (
+            if %copieFichierTheme% EQU 0 (
                 echo "Ajout du thème au fichier de configuration..."
                 call :ajoutThemeInFichierConfiguration
-                if %ajoutThemeInFichierConfiguration% (
+                if %ajoutThemeInFichierConfiguration% EQU 0 (
                     move $packageFile2 $packageFile && echo "Installation réussi" || echo "Une erreur s'est produite lors de la modification du fichier de configuration"
                 ) else (
                     echo "Une erreur s'est produite lors de la modification du fichier de configuration"
