@@ -1,101 +1,113 @@
 @echo off
-setlocal EnableDelayedExpansion
-    ::----------::
-    :: Variable ::
-    ::----------::
-    set "nameFileInstallExtension=installExtensionVscode-theme.vbs"
-    set "nameFileSuppFileTemp=suppressionFileTemp.bat"
-    set "nameFileOrig=%HomeDrive%%HomePath%\Downloads\dark-perso.json"
 
-    for /f %%a in ('dir "%HomeDrive%%HomePath%\.vscode\extensions" /b /ad') do (
-        echo %%a | findstr "github-vscode-theme">nul && (
-            set "nameFolderTheme=%%a"
-        )
-    )
+::==========================================::
+:: Vérification de l'installation de vscode ::
+::==========================================::
+:verifVsCodeInstallation
 
-    set "nameFileDest=%HomeDrive%%HomePath%\.vscode\extensions\%nameFolderTheme%\themes\"
-    SET "pathFilePackageJson=%HomeDrive%%HomePath%\.vscode\extensions\%nameFolderTheme%\package.json"
+goto :EOF
+
+::========================::
+:: Installation de vscode ::
+::========================::
+:installationVsCode
+
+goto :EOF
 
 
 
-    :: suppression des fichiers temporaires ::
-    IF EXIST ".\%nameFileInstallExtension%" del ".\%nameFileInstallExtension%"
-    IF EXIST ".\%nameFileSuppFileTemp%"     del ".\%nameFileSuppFileTemp%"
+::=======================================::
+:: Demande d'installation du thème perso ::
+::=======================================::
+:demandeInstallationThemePerso
+
+goto :EOF
 
 
-    ::------::
-    :: Main ::
-    ::------::
-    :: Verification de l'extension github theme ::
-    code --list-extensions | findstr "GitHub.github-vscode-theme">nul && (
-        :: copie du fichier dark-perso.json dans le dossier de l'extension github theme ::
-        xcopy /Y "%nameFileOrig%" "%nameFileDest%" 2>nul >nul
+::================================================::
+:: Vérification de l'installation de github thème ::
+::================================================::
+:verifExtentionGithubInstallation
+
+goto :EOF
 
 
-        :: Ajout du theme dans le fichier package.json ::
-        call :detecteLigneAjout
-        call :ajoutTheme
-        set "rien="
-    ) || (
-        :: Si l'extension github theme n'est pas installee, on demande a installer l'extension ::
-        call :CreateConfirmInstallExtension
-        start %nameFileInstallExtension%
-    )
-endlocal
-goto :eof
+::=============================::
+:: Intallation de github thème ::
+::=============================::
+:installationExtentionGithubTheme
+
+goto :EOF
 
 
+::=====================================::
+:: Copie du fichier contenant le thème ::
+::=====================================::
+:copieFichierTheme
+    ::----------------------------------------------------::
+    :: récupération de la dernière version de l'extention ::
+    ::----------------------------------------------------::
 
-:ajoutTheme
-    set /a "cpt=1"
-    for /f "skip=1 delims=" %%b in (' TYPE "!pathFilePackageJson!"') do (
-        set /a "cpt+=1"
-        if "!cpt!"=="2" ( echo {>"%pathFilePackageJson%" )
-
-        if !cpt!==!numLigneModif! (
-            echo %%b,>>"%pathFilePackageJson%"
-            echo             {>>"%pathFilePackageJson%"
-			echo                 "label": "GitHub Dark Perso",>>"%pathFilePackageJson%"
-			echo                 "uiTheme": "vs-dark",>>"%pathFilePackageJson%"
-			echo                 "path": "./themes/dark-perso.json">>"%pathFilePackageJson%"
-			echo             }>>"%pathFilePackageJson%"
-        ) else (
-            echo %%b>>"%pathFilePackageJson%"
-        )
-    )
-goto :eof
+    :: Séparation du nom et des numéros versions
 
 
-:detecteLigneAjout
-    set /a "cpt=0"
-    for /f "delims=" %%b in (' TYPE "%pathFilePackageJson%"') do (
-        set /a "cpt+=1"
-        echo %%b | findstr "]">nul && ( echo !a! | findstr "}">nul && ( set /a "numLigneModif=!cpt!-1" & goto :eof ))
-        set "a=%%b"
-    )
-goto :eof
+    :: mise de toute les versions sur le même nombre de chiffre
+
+
+    :: récupération de la dernière version
+
+    :: récupération du nom du dossier correspondant à la dernière version
+
+
+    ::-------------------------------------::
+    :: Copie du fichier contenant le thème ::
+    ::-------------------------------------::
+
+
+goto :EOF
 
 
 
-:CreateConfirmInstallExtension
-echo @echo off> %nameFileSuppFileTemp%
-    echo    IF EXIST ".\%nameFileInstallExtension%" del ".\%nameFileInstallExtension%">> %nameFileSuppFileTemp%
-    echo    IF EXIST ".\%nameFileSuppFileTemp%"     del ".\%nameFileSuppFileTemp%">> %nameFileSuppFileTemp%
-    echo goto :eof>> %nameFileSuppFileTemp%
+::============================================::
+:: Ajout du thème au fichier de configuration ::
+::============================================::
+:ajoutThemeInFichierConfiguration
 
-    echo rep = MsgBox ^("L'extension github theme n'est pas installee." ^& vbcrlf ^& vbcrlf ^& "Voullez vous l'installer ?", vbYesNo + vbInformation, "Installation de l'extention"^)> %nameFileInstallExtension%
-    echo if rep = vbYes then>> %nameFileInstallExtension%
-    echo    prog = "installateur.bat installExtension">> %nameFileInstallExtension%
-    echo    WScript.CreateObject ("Wscript.shell").run(prog), ^0>> %nameFileInstallExtension%
-    echo else>> %nameFileInstallExtension%
-    echo    wscript.echo "L'installation de l'extension n'a pas ete effectuee. Le theme n'a donc pas ete installe.">> %nameFileInstallExtension%
-    echo    WScript.CreateObject ("Wscript.shell").run("%nameFileSuppFileTemp%"), ^0>> %nameFileInstallExtension%
-    echo end if>> %nameFileInstallExtension%
-goto :eof
+goto :EOF
 
 
 
-:test
-
-
-goto :eof
+::======::
+:: Main ::
+::======::
+:: commande main final
+if verifVsCodeInstallation
+then
+    if demandeInstallationThemePerso
+    then
+        echo 'Installation du thème personnalisé...'
+        if verifExtentionGithubInstallation
+        then
+            echo 'copie du fichier contenant le thème...'
+            if copieFichierTheme
+            then
+                echo 'Ajout du thème au fichier de configuration...'
+                if ajoutThemeInFichierConfiguration
+                then
+                    mv $packageFile2 $packageFile && echo 'Installation réussi' || echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
+                else
+                    echo 'Une erreur s'\''est produite lors de la modification du fichier de configuration'
+                fi
+            else
+                echo 'Une erreur s'\''est produite lors de la copie du fichier contenant le thème'
+            fi
+        fi
+    else
+        echo 'Le thème personnalisé ne sera pas installé'
+    fi
+else
+    if [ $erreur -eq 0 ]
+    then
+        echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode'
+    fi
+fi
