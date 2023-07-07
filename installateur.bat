@@ -10,15 +10,15 @@ echo "code succes : %SUCCESLEVEL%"
 set /a "test=0"
 
 if %test% (
-    echo "true"
+    echo "true 1"
 ) else (
-    echo "false"
+    echo "false 1"
 )
 
 %test% && (
-    echo "true"
+    echo "true 2"
 ) || (
-    echo "false"
+    echo "false 2"
 )
 
 exit /b
