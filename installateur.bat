@@ -100,7 +100,7 @@ if %verifVsCodeInstallation% (
                 echo "Ajout du thème au fichier de configuration..."
                 call :ajoutThemeInFichierConfiguration
                 if %ajoutThemeInFichierConfiguration% (
-                    mv $packageFile2 $packageFile && echo "Installation réussi" || echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+                    move $packageFile2 $packageFile && echo "Installation réussi" || echo "Une erreur s'est produite lors de la modification du fichier de configuration"
                 ) else (
                     echo "Une erreur s'est produite lors de la modification du fichier de configuration"
                 )
