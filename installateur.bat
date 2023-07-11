@@ -44,8 +44,8 @@ goto :EOF
 :verifVsCodeInstallation
     call code --version >nul 2>&1 && ( set /a "verifVsCodeInstallation=0" ) || ( set /a "verifVsCodeInstallation=1" )
 
-    if "%verifVsCodeInstallation%" NEQ "0" (
-        set /p "reponse=Visual Studio Code n'est pas installé, Voulez-vous l'installer ? (y/n)"
+    if "!verifVsCodeInstallation!" NEQ "0" (
+        set /p "reponse=Visual Studio Code n'est pas installé, Voulez-vous l'installer ? (y/n) : "
 
         echo %reponse% | findstr /R "^y(es)?$" && ( call :installationVsCode || ( set /a "erreur=0" & set /a "verifVsCodeInstallation=1" & goto :EOF )) || ( echo "Visual studio Code ne sera pas installé" & set /a "erreur=1" & set /a "verifVsCodeInstallation=1" & goto :EOF )
     ) else (
