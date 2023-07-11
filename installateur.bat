@@ -6,6 +6,7 @@
 setlocal EnableDelayedExpansion
     call :verifVsCodeInstallation
     if "%verifVsCodeInstallation%" EQU "0" (
+        goto :EOF
         call :demandeInstallationThemePerso
         if "%demandeInstallationThemePerso%" EQU "0" (
             echo "Installation du thème personnalisé..."
