@@ -48,7 +48,7 @@ goto :EOF
         set /p "reponse=Visual Studio Code n'est pas installe, Voulez-vous l'installer ? (y/n) : "
 
         echo reponse = '!reponse!'
-        echo !reponse! | findstr /r /c:"^y" && echo oui || echo non
+        echo !reponse! | findstr /r /c:"^y$" && echo oui || echo non
     ) else (
         echo Visual studio Code est déjà installé
     )
