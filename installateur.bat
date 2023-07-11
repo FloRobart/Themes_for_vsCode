@@ -48,7 +48,7 @@ goto :EOF
         set /p "reponse=Visual Studio Code n'est pas installé, Voulez-vous l'installer ? (y/n) : "
 
         ::echo !reponse! | findstr /R "^y(es)?$" && ( call :installationVsCode & echo Installation de Visual Studio Code & goto :EOF) || ( echo Visual studio Code ne sera pas installe & set /a "erreur=1" & set /a "verifVsCodeInstallation=1" & goto :EOF )
-        echo %reponse% | findstr /R "^^y(es)?$" && echo oui || echo non
+        echo %reponse% | findstr /R "y(es)?$" && echo oui || echo non
     ) else (
         echo Visual studio Code est déjà installé
     )
