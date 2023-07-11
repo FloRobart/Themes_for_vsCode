@@ -3,43 +3,55 @@
 ::======::
 :: Main ::
 ::======::
-:: commande main final
-call :verifVsCodeInstallation
-if %verifVsCodeInstallation% EQU 0 (
-    call :demandeInstallationThemePerso
-    if %demandeInstallationThemePerso% EQU 0 (
-        echo "Installation du thème personnalisé..."
-        call :verifExtentionGithubInstallation
-        if %verifExtentionGithubInstallation% EQU 0 (
-            echo "copie du fichier contenant le thème..."
-            call :copieFichierTheme
-            if %copieFichierTheme% EQU 0 (
-                echo "Ajout du thème au fichier de configuration..."
-                call :ajoutThemeInFichierConfiguration
-                if %ajoutThemeInFichierConfiguration% EQU 0 (
-                    move $packageFile2 $packageFile && echo "Installation réussi" || echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+setlocal EnableDelayedExpansion
+    call :verifVsCodeInstallation
+    if %verifVsCodeInstallation% EQU 0 (
+        call :demandeInstallationThemePerso
+        if %demandeInstallationThemePerso% EQU 0 (
+            echo "Installation du thème personnalisé..."
+            call :verifExtentionGithubInstallation
+            if %verifExtentionGithubInstallation% EQU 0 (
+                echo "copie du fichier contenant le thème..."
+                call :copieFichierTheme
+                if %copieFichierTheme% EQU 0 (
+                    echo "Ajout du thème au fichier de configuration..."
+                    call :ajoutThemeInFichierConfiguration
+                    if %ajoutThemeInFichierConfiguration% EQU 0 (
+                        move %packageFile2% %packageFile% && echo "Installation réussi" || echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+                    ) else (
+                        echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+                    )
                 ) else (
-                    echo "Une erreur s'est produite lors de la modification du fichier de configuration"
+                    echo "Une erreur s'est produite lors de la copie du fichier contenant le thème"
                 )
-            ) else (
-                echo "Une erreur s'est produite lors de la copie du fichier contenant le thème"
             )
+        ) else (
+            echo "Le thème personnalisé ne sera pas installé"
         )
     ) else (
-        echo "Le thème personnalisé ne sera pas installé"
+        if %erreur% EQU 0 (
+            echo "Une erreur s'est produite lors de l'installation de VsCode"
+        )
     )
-) else (
-    if %erreur% EQU 0 (
-        echo "Une erreur s'est produite lors de l'installation de VsCode"
-    )
-)
+    endlocal
+goto :EOF
 
 
 ::==========================================::
 :: Vérification de l'installation de vscode ::
 ::==========================================::
 :verifVsCodeInstallation
+    call code --version >nul 2>&1 && ( set /a "verifVsCodeInstallation=0" ) || ( set /a "verifVsCodeInstallation=1" )
 
+    if %verifVsCodeInstallation% NEQ 0 (
+        set /p "reponse=Visual Studio Code n'est pas installé, Voulez-vous l'installer ? (y/n)"
+
+        echo %reponse% | findstr /R "^y(es)?$" && ( call :installationVsCode || ( set /a "erreur=0" & set /a "verifVsCodeInstallation=1" & goto :EOF )) || ( echo "Visual studio Code ne sera pas installé" & set /a "erreur=1" & set /a "verifVsCodeInstallation=1" & goto :EOF )
+    ) else (
+        echo "Visual studio Code est déjà installé"
+    )
+
+    set /a "verifVsCodeInstallation=0"
 goto :EOF
 
 ::========================::
