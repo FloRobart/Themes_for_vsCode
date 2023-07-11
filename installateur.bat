@@ -45,10 +45,10 @@ goto :EOF
     call code --version >nul 2>&1 && ( set /a "verifVsCodeInstallation=0" ) || ( set /a "verifVsCodeInstallation=1" )
 
     if "!verifVsCodeInstallation!" NEQ "0" (
-        set /p "reponse=Visual Studio Code n'est pas installé, Voulez-vous l'installer ? (y/n) : "
+        set /p "reponse=Visual Studio Code n'est pas installe, Voulez-vous l'installer ? (y/n) : "
 
         echo reponse = '!reponse!'
-        echo !reponse! | findstr /r /c:"^y(es)?$" && echo oui || echo non
+        echo !reponse! | findstr /r /c:"y" && echo oui || echo non
     ) else (
         echo Visual studio Code est déjà installé
     )
