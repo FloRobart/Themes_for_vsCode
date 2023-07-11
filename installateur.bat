@@ -47,16 +47,8 @@ goto :EOF
     if "!verifVsCodeInstallation!" NEQ "0" (
         set /p "reponse=Visual Studio Code n'est pas installé, Voulez-vous l'installer ? (y/n) : "
 
-        echo !reponse! | findstr /r /c:"^y(es)?$" && (
-            call :installationVsCode
-            if "!installationVsCode!" EQU "0" (
-                echo "Installation réussi"
-            ) else (
-                echo "Une erreur s'est produite lors de l'installation de VsCode"
-            )
-        ) || (
-            echo "Le thème personnalisé ne sera pas installé"
-        )
+        echo reponse = '!reponse!'
+        echo !reponse! | findstr /r /c:"^y(es)?$" && echo oui || echo non
     ) else (
         echo Visual studio Code est déjà installé
     )
