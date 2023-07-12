@@ -69,9 +69,9 @@ goto :EOF
 :installationVsCode
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
-        echo flag 1
-        for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe"`) do ( set "file=%%a" & exit )
-
+        echo "flag 1"
+        for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a" & exit
+        echo "flag 2"
         echo '!file!'
         start /wait /D "C:\Users\%USERNAME%\Downloads\" !file!
         echo "Installation de Visual Studio Code terminée"
