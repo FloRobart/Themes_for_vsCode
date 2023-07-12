@@ -72,8 +72,8 @@ goto :EOF
         echo C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe
 
 
-
-        start /wait /D "C:\Users\%USERNAME%\Downloads\" VSCodeUserSetup-x64-1.80.0.exe
+        set "file=VSCodeUserSetup-x64-1.80.0.exe"
+        start /wait /D "C:\Users\%USERNAME%\Downloads\" %file%
         echo "Installation de Visual Studio Code terminée"
     ) || (
         echo "Une erreur s'est produite lors de l'installation de Visual Studio Code"
