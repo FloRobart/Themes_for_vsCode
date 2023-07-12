@@ -69,19 +69,12 @@ goto :EOF
 :installationVsCode
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
-        start /wait "\VSCodeUserSetup-x64-*.exe"
+        start /wait "C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe"
+        echo "Installation de Visual Studio Code terminée"
     ) || (
         echo "Une erreur s'est produite lors de l'installation de Visual Studio Code"
     )
 goto :EOF
-
-Set "Search=abcd_*_*"
-Set cnt=0
-for /f "tokens=1* delims=:" %%A in (
-  'dir /B /ON /A-D "%Search%" ^|Findstr /i /n "^" '
-) do set "File[%%A]=%%~B"&Set Cnt=%%A
-Echo Search "%Search%" got %Cnt% result(s)
-For /L %%C in (1,1,%Cnt%) Do Set File[%%C]
 
 ::=======================================::
 :: Demande d'installation du thème perso ::
