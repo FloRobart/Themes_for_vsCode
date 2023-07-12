@@ -44,13 +44,19 @@ goto :EOF
 :verifVsCodeInstallation
     call code --version >nul 2>&1 && ( set /a "verifVsCodeInstallation=0" ) || ( set /a "verifVsCodeInstallation=1" )
 
-    if "!verifVsCodeInstallation!" NEQ "0" (
+    code --version >nul 2>&1 && (
+        echo Visual studio Code est déjà installe
+    ) || (
         set /p "reponse=Visual Studio Code n'est pas installe, Voulez-vous l'installer ? (y/n) : "
 
-        echo reponse = '!reponse!'
-        echo !reponse! | FINDSTR /R /C:"^y" && echo oui || echo non
-    ) else (
-        echo Visual studio Code est déjà installé
+        echo !reponse! | FINDSTR /I /R /C:"^y" && (
+            echo Installation de Visual Studio Code
+            call :installationVsCode
+        ) || (
+            echo Visual Studio Code ne sera pas installe
+            set /a "verifVsCodeInstallation=1"
+            goto :EOF
+        )
     )
 
     set /a "verifVsCodeInstallation=0"
@@ -62,6 +68,10 @@ goto :EOF
 ::========================::
 :installationVsCode
     echo en cours d'installation
+
+
+
+    echo Installation réussi
 goto :EOF
 
 
