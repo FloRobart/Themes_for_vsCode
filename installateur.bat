@@ -52,14 +52,14 @@ goto :EOF
         echo !reponse! | FINDSTR /I /R /C:"^y" && (
             echo Installation de Visual Studio Code
             call :installationVsCode
+            set /a "verifVsCodeInstallation=0"
+            goto :EOF
         ) || (
             echo Visual Studio Code ne sera pas installe
             set /a "verifVsCodeInstallation=1"
             goto :EOF
         )
     )
-
-    set /a "verifVsCodeInstallation=0"
 goto :EOF
 
 
@@ -76,6 +76,7 @@ goto :EOF
                 echo "Visual Studio Code vas etre installe"
                 echo "C:\%USER%\Downloads\VSCodeUserSetup-x64-*.exe"
             ) else (
+                echo relance de la boucle
                 goto :waitFileVsCode
             )
     ) || (
