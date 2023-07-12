@@ -67,32 +67,11 @@ goto :EOF
 :: Installation de vscode ::
 ::========================::
 :installationVsCode
-    echo en cours d'installation
+    echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
-        set /a "cpt=0"
-        echo Telechargement reussi
-        :waitFileVsCode
-            timeout /t 5 >nul 2>&1
-            FOR /F "usebackq" %%a IN (`dir /B /O-D "VSCodeUserSetup-x64-*"`) do ( set fileVsCode=%%a & exit )
-            echo '%fileVsCode%'
-            echo '!fileVsCode!'
-            goto :EOF
-
-            if exist "VSCodeUserSetup-x64-*.exe" (
-                echo Visual Studio Code vas etre installe
-                echo "C:\%USER%\Downloads\VSCodeUserSetup-x64-*.exe"
-                call "C:\%USER%\Downloads\VSCodeUserSetup-x64-*.exe" && echo Installation reussi
-            ) else (
-                if "%cpt%" EQU "5" (
-                    echo "Une erreur s'est produite lors de l'installation de VsCode"
-                    set /a "erreur=1"
-                    goto :EOF
-                )
-                echo relance de la boucle
-                goto :waitFileVsCode
-            )
+        start /wait "\VSCodeUserSetup-x64-*.exe"
     ) || (
-        echo "Une erreur s'est produite lors de l'installation de VsCode"
+        echo "Une erreur s'est produite lors de l'installation de Visual Studio Code"
     )
 goto :EOF
 
