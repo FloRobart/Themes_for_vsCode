@@ -68,7 +68,12 @@ goto :EOF
 ::========================::
 :installationVsCode
     echo en cours d'installation
-    powershell saps 'https://code.visualstudio.com/docs/?dv=win' -wi hidden && echo "Installation réussi" || echo "Une erreur s'est produite lors de l'installation de VsCode"
+    cmd /c start /wait 'https://code.visualstudio.com/docs/?dv=win' && (
+        echo "Installation réussi"
+        
+    ) || (
+        echo "Une erreur s'est produite lors de l'installation de VsCode"
+    )
 goto :EOF
 
 
