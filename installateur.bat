@@ -68,10 +68,10 @@ goto :EOF
 ::========================::
 :installationVsCode
     echo en cours d'installation
+    call https://code.visualstudio.com/docs/?dv=win
 
 
-
-    echo Installation réussi
+    echo Installation reussi
 goto :EOF
 
 
