@@ -4,3 +4,6 @@
 
 # Fichier google drive
 *.ini
+
+# fichier compiler C
+.exe
