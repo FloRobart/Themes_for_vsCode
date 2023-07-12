@@ -72,6 +72,7 @@ goto :EOF
 
         for /f "USEBACKQ tokens=*" %%a in (`dir /b "C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe"`) do ( set "file=%%a" & exit )
 
+        echo '!file!'
         start /wait /D "C:\Users\%USERNAME%\Downloads\" !file!
         echo "Installation de Visual Studio Code terminée"
     ) || (
