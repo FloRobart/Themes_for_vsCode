@@ -70,7 +70,7 @@ goto :EOF
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
         echo C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe
-        start /wait /D "C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe"
+        start /wait /D "C:\Users\%USERNAME%\Downloads\" VSCodeUserSetup-x64-*.exe
         echo "Installation de Visual Studio Code terminée"
     ) || (
         echo "Une erreur s'est produite lors de l'installation de Visual Studio Code"
