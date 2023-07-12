@@ -68,7 +68,7 @@ goto :EOF
 ::========================::
 :installationVsCode
     echo en cours d'installation
-    start /wait 'https://code.visualstudio.com/docs/?dv=win' && (
+    cmd /c start /wait https://code.visualstudio.com/docs/?dv=win && (
         echo "Installation réussi"
         
     ) || (
