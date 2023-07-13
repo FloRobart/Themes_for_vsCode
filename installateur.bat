@@ -7,9 +7,7 @@ setlocal EnableDelayedExpansion
     call :verifVsCodeInstallation
     if "%verifVsCodeInstallation%" EQU "0" (
         call :demandeInstallationThemePerso
-        echo demandeInstallationThemePerso '!demandeInstallationThemePerso!'
-        goto :EOF
-        if "%demandeInstallationThemePerso%" EQU "0" (
+        if "!demandeInstallationThemePerso!" EQU "0" (
             echo Installation du theme personnalise...
             call :verifExtentionGithubInstallation
             goto :EOF
