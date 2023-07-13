@@ -68,7 +68,7 @@ goto :EOF
 :installationVsCode
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
-        for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "'%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe'"`) do set "file=%%a"
+        for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
         echo Installation de Visual Studio Code terminee
     ) || (
@@ -135,7 +135,7 @@ goto :EOF
     ::-------------------------------------::
     :: Copie du fichier contenant le thème ::
     ::-------------------------------------::
-    for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "'%HomeDrive%%HomePath%\.vscode\extensions\github.github-vscode-theme-*'"`) do (
+    for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "%HomeDrive%%HomePath%\.vscode\extensions\github.github-vscode-theme-*"`) do (
         echo fichier : '%%a'
     )
 
