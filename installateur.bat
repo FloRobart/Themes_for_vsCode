@@ -9,10 +9,10 @@ setlocal EnableDelayedExpansion
     if "%verifVsCodeInstallation%" EQU "0" (
         call :demandeInstallationThemePerso
         echo demandeInstallationThemePerso '%demandeInstallationThemePerso%'
-        goto :EOF
         if "%demandeInstallationThemePerso%" EQU "0" (
             echo Installation du theme personnalise...
             call :verifExtentionGithubInstallation
+            goto :EOF
             if "%verifExtentionGithubInstallation%" EQU "0" (
                 echo copie du fichier contenant le theme...
                 call :copieFichierTheme
@@ -47,7 +47,7 @@ goto :EOF
     call code --version >nul 2>&1 && ( set /a "verifVsCodeInstallation=0" ) || ( set /a "verifVsCodeInstallation=1" & set /a "erreur=0" )
 
     code --version >nul 2>&1 && (
-        echo Visual Studio Code est déjà installe
+        echo Visual Studio Code est deja installe
         set /a "verifVsCodeInstallation=0"
     ) || (
         set /p "reponse=Visual Studio Code n'est pas installe, Voulez-vous l'installer ? (y/n) : "
@@ -83,7 +83,15 @@ goto :EOF
 :: Demande d'installation du thème perso ::
 ::=======================================::
 :demandeInstallationThemePerso
+    set /p "reponse=Voulez-vous installer le theme personnalise ? (y/n) : "
 
+    echo !reponse! | FINDSTR /I /R /C:"^y" && (
+        echo Installation du theme personnalise
+        set /a "demandeInstallationThemePerso=0"
+    ) || (
+        echo Le theme personnalise ne sera pas installe
+        set /a "demandeInstallationThemePerso=1"
+    )
 goto :EOF
 
 
