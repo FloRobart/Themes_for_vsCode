@@ -4,11 +4,14 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
+echo home drive '%HomeDrive%'
+echo home path '%HomePath%'
+goto :EOF
+
     call :verifVsCodeInstallation
     if "%verifVsCodeInstallation%" EQU "0" (
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
-            echo Installation du theme personnalise...
             call :verifExtentionGithubInstallation
             goto :EOF
             if "%verifExtentionGithubInstallation%" EQU "0" (
@@ -85,7 +88,7 @@ goto :EOF
 
     echo reponse '!reponse!'
     echo !reponse! | FINDSTR /I /R /C:"^y" && (
-        echo Installation du theme personnalise
+        echo Installation du theme personnalise...
         set /a "demandeInstallationThemePerso=0"
     ) || (
         echo Le theme personnalise ne sera pas installe
