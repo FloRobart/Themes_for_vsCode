@@ -5,10 +5,10 @@
 ::======::
 setlocal EnableDelayedExpansion
     call :verifVsCodeInstallation
-    echo verifVsCodeInstallation '%verifVsCodeInstallation%'
     if "%verifVsCodeInstallation%" EQU "0" (
         call :demandeInstallationThemePerso
         echo demandeInstallationThemePerso '%demandeInstallationThemePerso%'
+        goto :EOF
         if "%demandeInstallationThemePerso%" EQU "0" (
             echo Installation du theme personnalise...
             call :verifExtentionGithubInstallation
@@ -85,6 +85,7 @@ goto :EOF
 :demandeInstallationThemePerso
     set /p "reponse=Voulez-vous installer le theme personnalise ? (y/n) : "
 
+    echo reponse '!reponse!'
     echo !reponse! | FINDSTR /I /R /C:"^y" && (
         echo Installation du theme personnalise
         set /a "demandeInstallationThemePerso=0"
