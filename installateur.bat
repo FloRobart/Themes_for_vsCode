@@ -4,26 +4,22 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
-echo home drive '%HomeDrive%'
-echo home path '%HomePath%'
-goto :EOF
-
     call :verifVsCodeInstallation
     if "%verifVsCodeInstallation%" EQU "0" (
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
             call :verifExtentionGithubInstallation
-            goto :EOF
-            if "%verifExtentionGithubInstallation%" EQU "0" (
+            if "!verifExtentionGithubInstallation!" EQU "0" (
                 echo copie du fichier contenant le theme...
                 call :copieFichierTheme
+                goto :EOF
                 if "%copieFichierTheme%" EQU "0" (
                     echo Ajout du theme au fichier de configuration...
                     call :ajoutThemeInFichierConfiguration
                     if "%ajoutThemeInFichierConfiguration%" EQU "0" (
                         move "%packageFile2% %packageFile%" && echo Installation reussi || echo Une erreur s'est produite lors de la modification du fichier de configuration
                     ) else (
-                        echo eUne erreur s'est produite lors de la modification du fichier de configuratione
+                        echo Une erreur s'est produite lors de la modification du fichier de configuratione
                     )
                 ) else (
                     echo Une erreur s'est produite lors de la copie du fichier contenant le theme
@@ -72,8 +68,8 @@ goto :EOF
 :installationVsCode
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
-        for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "'C:\Users\%USERNAME%\Downloads\VSCodeUserSetup-x64-*.exe'"`) do set "file=%%a"
-        start /wait /D "C:\Users\%USERNAME%\Downloads\" !file!
+        for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "'%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe'"`) do set "file=%%a"
+        start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
         echo Installation de Visual Studio Code terminee
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
@@ -111,14 +107,14 @@ goto :EOF
             echo Installation de l'extention github theme...
             call :installationExtentionGithubTheme
             if "!installationExtentionGithubTheme!" EQU "0" (
-                echo L'extention github theme a ete installe
+                echo L'extention github theme a ete installe avec succes
                 set /a "verifExtentionGithubInstallation=0"
             ) else (
                 echo Une erreur s'est produite lors de l'installation de l'extention github theme
                 set /a "verifExtentionGithubInstallation=1"
             )
         ) || (
-            echo L'exention github theme ne sera pas installe
+            echo L'extention Github theme ainsi que le theme lui meme ne seront pas installe
             set /a "verifExtentionGithubInstallation=1"
         )
     )
