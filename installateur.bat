@@ -87,7 +87,6 @@ goto :EOF
         echo Installation du theme personnalise...
         set /a "demandeInstallationThemePerso=0"
     ) || (
-        echo Le theme personnalise ne sera pas installe
         set /a "demandeInstallationThemePerso=1"
     )
 goto :EOF
@@ -133,24 +132,12 @@ goto :EOF
 :: Copie du fichier contenant le thème ::
 ::=====================================::
 :copieFichierTheme
-    ::----------------------------------------------------::
-    :: récupération de la dernière version de l'extention ::
-    ::----------------------------------------------------::
-
-    :: Séparation du nom et des numéros versions
-
-
-    :: mise de toute les versions sur le même nombre de chiffre
-
-
-    :: récupération de la dernière version
-
-    :: récupération du nom du dossier correspondant à la dernière version
-
-
     ::-------------------------------------::
     :: Copie du fichier contenant le thème ::
     ::-------------------------------------::
+    for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "'%HomeDrive%%HomePath%\.vscode\extensions\github.github-vscode-theme-*'"`) do (
+        echo fichier : '%%a'
+    )
 
 
 goto :EOF
