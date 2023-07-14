@@ -163,6 +163,6 @@ goto :EOF
     set /a "cpt=0"
     for /f "delims=" %%b in (' TYPE "!pathFilePackageJson!"') do (
         set /a "cpt+=1"
-        echo %%b | findstr /I /R /C:""themes": [">nul 2>&1 && ( set /a "numLigneModif=!cpt!-1" & goto :eof )
+        echo %%b | findstr /I /R /C:".themes.: \[">nul 2>&1 && ( set /a "numLigneModif=!cpt!-1" & goto :eof )
     )
 goto :eof
