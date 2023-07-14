@@ -70,7 +70,6 @@ goto :EOF
 :demandeInstallationThemePerso
     set /p "reponse=Voulez-vous installer le theme personnalise ? (y/n) : "
 
-    echo reponse '!reponse!'
     echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
         echo Installation du theme personnalise...
         set /a "demandeInstallationThemePerso=0"
@@ -136,6 +135,7 @@ goto :EOF
 
     if "!erreur!" NEQ "1" (
         echo Le theme personnalise a ete installe avec succes
+        echo Vous pouvez fermer cette fenetre.
     )
 goto :EOF
 
