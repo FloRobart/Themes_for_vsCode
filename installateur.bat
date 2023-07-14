@@ -10,14 +10,14 @@ setlocal EnableDelayedExpansion
         if "!demandeInstallationThemePerso!" EQU "0" (
             call :verifExtentionGithubInstallation
             if "!verifExtentionGithubInstallation!" EQU "0" (
+                SET "pathFilePackageJson=%HomeDrive%%HomePath%\.vscode\extensions\%nameFolderTheme%\package.json"
                 echo copie du fichier contenant le theme...
                 call :copieFichierTheme
-                goto :EOF
-                if "%copieFichierTheme%" EQU "0" (
+                if "!copieFichierTheme!" EQU "0" (
                     echo Ajout du theme au fichier de configuration...
                     call :ajoutThemeInFichierConfiguration
                     if "%ajoutThemeInFichierConfiguration%" EQU "0" (
-                        move "%packageFile2% %packageFile%" && echo Installation reussi || echo Une erreur s'est produite lors de la modification du fichier de configuration
+                        echo Installation reussi
                     ) else (
                         echo Une erreur s'est produite lors de la modification du fichier de configuratione
                     )
@@ -136,17 +136,43 @@ goto :EOF
     :: Copie du fichier contenant le thème ::
     ::-------------------------------------::
     for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "%HomeDrive%%HomePath%\.vscode\extensions\github.github-vscode-theme-*"`) do (
-        echo fichier : '%%a'
+        xcopy /Y /Q ".\Themes\dark-perso.json" "%HomeDrive%%HomePath%\.vscode\extensions\%%a\themes\" && (
+            set /a "copieFichierTheme=0"
+        ) || (
+            set /a "copieFichierTheme=1"
+        )
     )
-
-
 goto :EOF
-
 
 
 ::============================================::
 :: Ajout du thème au fichier de configuration ::
 ::============================================::
 :ajoutThemeInFichierConfiguration
+    call :detecteLigneAjout
+    set /a "cpt=1"
+    for /f "skip=1 delims=" %%b in (' TYPE "!pathFilePackageJson!"') do (
+        set /a "cpt+=1"
+        if "!cpt!"=="2" ( echo {>"%pathFilePackageJson%" )
 
+        if !cpt!==!numLigneModif! (
+            echo %%b,>>"%pathFilePackageJson%"
+            echo             {>>"%pathFilePackageJson%"
+			echo                 "label": "GitHub Dark Perso",>>"%pathFilePackageJson%"
+			echo                 "uiTheme": "vs-dark",>>"%pathFilePackageJson%"
+			echo                 "path": "./themes/dark-perso.json">>"%pathFilePackageJson%"
+			echo             }>>"%pathFilePackageJson%"
+        ) else (
+            echo %%b>>"%pathFilePackageJson%"
+        )
+    )
 goto :EOF
+
+:detecteLigneAjout
+    set /a "cpt=0"
+    for /f "delims=" %%b in (' TYPE "%pathFilePackageJson%"') do (
+        set /a "cpt+=1"
+        echo %%b | findstr "]">nul && ( echo !a! | findstr "}">nul && ( set /a "numLigneModif=!cpt!-1" & goto :eof ))
+        set "a=%%b"
+    )
+goto :eof
