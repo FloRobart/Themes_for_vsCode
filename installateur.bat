@@ -29,8 +29,6 @@ goto :EOF
 :: Vérification de l'installation de vscode ::
 ::==========================================::
 :verifVsCodeInstallation
-    call code --version >nul 2>&1 && ( set /a "verifVsCodeInstallation=0" ) || ( set /a "verifVsCodeInstallation=1" & set /a "erreur=0" )
-
     code --version >nul 2>&1 && (
         echo Visual Studio Code est deja installe
         set /a "verifVsCodeInstallation=0"
@@ -58,13 +56,8 @@ goto :EOF
     start /wait https://code.visualstudio.com/docs/?dv=win && (
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
-        if EXIST "%HomeDrive%%HomePath%\.vscode" (
-            echo Installation de Visual Studio Code terminee
-        ) else (
-            echo Installation de Visual Studio Code abandonnee ou echouee
-            exit /b 0
-        )
-        echo Installation de Visual Studio Code terminee
+        
+        code --version >nul 2>&1 && ( echo Visual Studio Code a ete installe ) || ( echo Visual Studio Code n'a pas ete installe & exit /b 1 )
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
     )
