@@ -146,12 +146,12 @@ goto :EOF
         if "!cpt!"=="2" ( echo {>"!pathFilePackageJson!" )
 
         if !cpt!==!numLigneModif! (
-            echo %%b,>>"!pathFilePackageJson!"
+            echo %%b>>"!pathFilePackageJson!"
             echo             {>>"!pathFilePackageJson!"
 			echo                 "label": "GitHub Dark Perso",>>"!pathFilePackageJson!"
 			echo                 "uiTheme": "vs-dark",>>"!pathFilePackageJson!"
 			echo                 "path": "./themes/dark-perso.json">>"!pathFilePackageJson!"
-			echo             }>>"!pathFilePackageJson!"
+			echo             },>>"!pathFilePackageJson!"
         ) else (
             echo %%b>>"!pathFilePackageJson!"
         )
@@ -162,7 +162,7 @@ goto :EOF
     set /a "cpt=0"
     for /f "delims=" %%b in (' TYPE "!pathFilePackageJson!"') do (
         set /a "cpt+=1"
-        echo %%b | findstr "]">nul && ( echo !a! | findstr "}">nul && ( set /a "numLigneModif=!cpt!-1" & goto :eof ))
+        echo %%b | findstr "\"themes\": [">nul 2>&1 && ( set /a "numLigneModif=!cpt!" & goto :eof ))
         set "a=%%b"
     )
 goto :eof
