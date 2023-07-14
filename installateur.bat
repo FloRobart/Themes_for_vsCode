@@ -128,7 +128,6 @@ goto :EOF
         set /a "cpt+=1"
         xcopy /Y /Q ".\Themes\dark-perso.json" "%HomeDrive%%HomePath%\.vscode\extensions\%%a\themes\" && (
             call :ajoutThemeInFichierConfiguration
-            echo rien
         ) || (
             echo Une erreur s'est produite lors de la copie du fichier contenant le theme
         )
