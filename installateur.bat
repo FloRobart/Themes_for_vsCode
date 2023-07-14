@@ -37,7 +37,7 @@ goto :EOF
     ) || (
         set /p "reponse=Visual Studio Code n'est pas installe, Voulez-vous l'installer ? (y/n) : "
 
-        echo !reponse! | FINDSTR /I /R /C:"^y" && (
+        echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de Visual Studio Code
             call :installationVsCode
             set /a "verifVsCodeInstallation=0"
@@ -71,7 +71,7 @@ goto :EOF
     set /p "reponse=Voulez-vous installer le theme personnalise ? (y/n) : "
 
     echo reponse '!reponse!'
-    echo !reponse! | FINDSTR /I /R /C:"^y" && (
+    echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
         echo Installation du theme personnalise...
         set /a "demandeInstallationThemePerso=0"
     ) || (
