@@ -134,7 +134,7 @@ goto :EOF
         )
     )
 
-    if "!erreur!" EQU "0" (
+    if "!erreur!" NEQ "1" (
         echo Le theme personnalise a ete installe avec succes
     )
 goto :EOF
