@@ -130,7 +130,12 @@ goto :EOF
             call :ajoutThemeInFichierConfiguration
         ) || (
             echo Une erreur s'est produite lors de la copie du fichier contenant le theme
+            set /a "erreur=1" 
         )
+    )
+
+    if "!erreur!" EQU "0" (
+        echo Le theme personnalise a ete installe avec succes
     )
 goto :EOF
 
