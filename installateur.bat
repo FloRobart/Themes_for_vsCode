@@ -56,6 +56,7 @@ goto :EOF
 :installationVsCode
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
+        echo rien
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /OD "%HomeDrive%%HomePath%\Downloads\'VSCodeUserSetup-x64-*.exe'"`) do set "file=%%a"
         echo '!file!'
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
