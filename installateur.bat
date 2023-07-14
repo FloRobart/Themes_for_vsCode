@@ -57,7 +57,7 @@ goto :EOF
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
         
-        code --version >nul 2>&1 && ( echo Visual Studio Code a ete installe ) || ( echo Visual Studio Code n'a pas ete installe & exit /b 1 )
+        code --version >nul 2>&1 && ( echo Visual Studio Code a ete installe ) || ( echo Visual Studio Code n'a pas ete installe & exit /b )
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
     )
