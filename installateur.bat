@@ -12,6 +12,7 @@ setlocal EnableDelayedExpansion
             if "!verifExtentionGithubInstallation!" EQU "0" (
                 echo copie du fichier contenant le theme...
                 call :copieFichierTheme
+                pause
             )
         ) else (
             echo Le theme personnalise ne sera pas installe
@@ -57,7 +58,11 @@ goto :EOF
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
 
+        pause
+
         start /wait cmd /C ( code --version >nul 2>&1 && ( echo Visual Studio Code a ete installe & set /a "installationVsCode=0" ) || ( echo Visual Studio Code n'a pas ete installe & set /a "installationVsCode=1" ) )
+
+        pause
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
         set /a "installationVsCode=1"
