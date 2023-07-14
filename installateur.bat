@@ -38,7 +38,8 @@ goto :EOF
         echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de Visual Studio Code
             call :installationVsCode
-            set /a "verifVsCodeInstallation=0"
+            echo installationVsCode '!installationVsCode!'
+            set /a "verifVsCodeInstallation=!installationVsCode!"
         ) || (
             echo Visual Studio Code ainsi que le thème ne seront pas installe
             set /a "verifVsCodeInstallation=1"
@@ -57,9 +58,10 @@ goto :EOF
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
         
-        code --version >nul 2>&1 && ( echo Visual Studio Code a ete installe ) || ( echo Visual Studio Code n'a pas ete installe & exit /b )
+        code --version >nul 2>&1 && ( echo Visual Studio Code a ete installe & set /a "installationVsCode=0" ) || ( echo Visual Studio Code n'a pas ete installe & set /a "installationVsCode=1" )
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
+        set /a "installationVsCode=1"
     )
 goto :EOF
 
