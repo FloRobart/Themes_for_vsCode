@@ -71,8 +71,10 @@ goto :EOF
 
         if exist "%HomeDrive%%HomePath%\.vscode\" (
             echo Visual Studio Code a ete installe avec succes
+            set /a "installationVsCode=0"
         ) else (
             echo Visual Studio Code n'a pas ete installe
+            set /a "installationVsCode=1"
         )
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
