@@ -39,6 +39,7 @@ goto :EOF
         echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de Visual Studio Code
             call :installationVsCode
+            echo flag 1
             set /a "verifVsCodeInstallation=!installationVsCode!"
         ) || (
             echo Visual Studio Code ainsi que le theme ne seront pas installe
