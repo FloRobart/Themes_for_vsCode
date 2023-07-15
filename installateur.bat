@@ -41,8 +41,11 @@ goto :EOF
             call :installationVsCode
             echo flag 1
             set /a "verifVsCodeInstallation=!installationVsCode!"
+            echo flag 2
         ) || (
+            echo flag 3
             echo Visual Studio Code ainsi que le theme ne seront pas installe
+            echo flag 4
             set /a "verifVsCodeInstallation=1"
             set /a "erreur=1"
         )
@@ -57,9 +60,9 @@ goto :EOF
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
-
+        echo flag 5
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
-
+        echo flag 6
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
         set /a "installationVsCode=1"
