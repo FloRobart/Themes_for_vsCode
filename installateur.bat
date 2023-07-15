@@ -56,15 +56,9 @@ goto :EOF
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
-        start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
+        start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file! && set /a "test=0" || set /a "test=1"
 
-        code --version >nul 2>&1 && (
-            echo Visual Studio Code a ete installe avec succes
-            set /a "installationVsCode=0"
-        ) || (
-            echo Visual Studio Code n'a pas ete installe
-            set /a "installationVsCode=1"
-        )
+        echo test '!test!'
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
         set /a "installationVsCode=1"
