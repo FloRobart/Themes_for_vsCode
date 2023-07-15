@@ -59,9 +59,9 @@ goto :EOF
 :installationVsCode
     echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
-        if exist "%HomeDrive%%HomePath%\.vscode\" (
+        if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
             echo .vscode existe
-            rmdir /S /Q "%HomeDrive%%HomePath%\.vscode\"
+            rmdir /S /Q "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code"
         ) else (
             echo .vscode n'existe pas
         )
@@ -69,7 +69,7 @@ goto :EOF
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
         start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
 
-        if exist "%HomeDrive%%HomePath%\.vscode\" (
+        if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
             echo Visual Studio Code a ete installe avec succes
             set /a "installationVsCode=0"
         ) else (
