@@ -4,6 +4,9 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
+    echo '%~1'
+    goto :EOF
+
     call :verifVsCodeInstallation
     if "%verifVsCodeInstallation%" EQU "0" (
         call :demandeInstallationThemePerso
