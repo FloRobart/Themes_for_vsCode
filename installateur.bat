@@ -45,7 +45,7 @@ setlocal EnableDelayedExpansion
                 echo execution de vbscript
                 call :createVbs
                 call :executionVbs
-                goto :EOF
+                exit /b 0
             )
         )
     )
