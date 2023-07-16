@@ -5,7 +5,7 @@
 ::======::
 setlocal EnableDelayedExpansion
     call :verifVsCodeInstallation
-    if "%verifVsCodeInstallation%" EQU "0" (
+    if "!verifVsCodeInstallation!" EQU "0" (
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
             call :verifExtentionGithubInstallation
@@ -45,7 +45,6 @@ goto :EOF
             echo Installation de Visual Studio Code
             call :installationVsCode
             set /a "verifVsCodeInstallation=!installationVsCode!"
-            echo verifVsCodeInstallation '!verifVsCodeInstallation!'
         ) || (
             echo Visual Studio Code ainsi que le theme ne seront pas installes
             set /a "verifVsCodeInstallation=1"
@@ -70,7 +69,7 @@ goto :EOF
 
         if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
             echo Visual Studio Code a ete installe avec succes
-            set /a "installationVsCode=0"
+            set /a "installationVsCode=1"
             set /a "erreur=2"
         ) else (
             echo Visual Studio Code n'a pas ete installe
