@@ -19,8 +19,11 @@ setlocal EnableDelayedExpansion
                 call :copieFichierTheme
                 pause
             )
+            echo flag 6
+            pause
         ) else (
             echo Le theme personnalise ne sera pas installe
+            pause
         )
 
         if exist temp.vbs (
@@ -127,6 +130,7 @@ goto :EOF
 :: Vérification de l'installation de github thème ::
 ::================================================::
 :verifExtentionGithubInstallation
+    echo flag 4
     code --list-extensions | FINDSTR /I /R /C:"^GitHub\.github\-vscode\-theme*" >nul 2>&1 && (
         echo L'extention github theme est deja installe
         set /a "verifExtentionGithubInstallation=0"
@@ -148,6 +152,8 @@ goto :EOF
             set /a "verifExtentionGithubInstallation=1"
         )
     )
+    echo flag 5
+    pause
 goto :EOF
 
 
