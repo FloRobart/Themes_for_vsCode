@@ -5,6 +5,10 @@
 ::======::
 setlocal EnableDelayedExpansion
     if "%~1" EQU "0" (
+        if exist temp.vbs (
+            del temp.vbs
+        )
+
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
             call :verifExtentionGithubInstallation
@@ -17,6 +21,7 @@ setlocal EnableDelayedExpansion
             echo Le theme personnalise ne sera pas installe
         )
     ) else (
+        set "prog=%~0"
         call :verifVsCodeInstallation
         if "!verifVsCodeInstallation!" EQU "0" (
             call :demandeInstallationThemePerso
@@ -36,7 +41,7 @@ setlocal EnableDelayedExpansion
             ) else if "!erreur!" EQU "2" (
                 echo execution de vbscript
                 call :createVbs
-                ::call :executionVbs
+                call :executionVbs
                 goto :EOF
             )
         )
@@ -208,8 +213,10 @@ goto :eof
 :: Création du fichier VBS ::
 ::=========================::
 :createVbs
-    echo prog = "%~0 "0"">temp.vbs
+    echo %prog%
+    echo prog = "%prog% "0"">temp.vbs
     echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^0>>temp.vbs
+    pause
 goto :EOF
 
 :executionVbs
