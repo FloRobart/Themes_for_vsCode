@@ -4,8 +4,9 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
-    call :verifVsCodeInstallation
-    if "!verifVsCodeInstallation!" EQU "0" (
+    echo '%~0'
+    goto :EOF
+    if "%~1" EQU "0" (
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
             call :verifExtentionGithubInstallation
@@ -18,13 +19,28 @@ setlocal EnableDelayedExpansion
             echo Le theme personnalise ne sera pas installe
         )
     ) else (
-        if "%erreur%" EQU "0" (
-            echo Une erreur s'est produite lors de l'installation de VsCode
-        ) else if "!erreur!" EQU "2" (
-            :: Faire un script vbs
-            echo execution de vbscript
-
-            goto :EOF
+        call :verifVsCodeInstallation
+        if "!verifVsCodeInstallation!" EQU "0" (
+            call :demandeInstallationThemePerso
+            if "!demandeInstallationThemePerso!" EQU "0" (
+                call :verifExtentionGithubInstallation
+                if "!verifExtentionGithubInstallation!" EQU "0" (
+                    echo copie du fichier contenant le theme...
+                    call :copieFichierTheme
+                    pause
+                )
+            ) else (
+                echo Le theme personnalise ne sera pas installe
+            )
+        ) else (
+            if "%erreur%" EQU "0" (
+                echo Une erreur s'est produite lors de l'installation de VsCode
+            ) else if "!erreur!" EQU "2" (
+                echo execution de vbscript
+                call :createVbs
+                call :executionVbs
+                goto :EOF
+            )
         )
     )
     endlocal
@@ -188,3 +204,16 @@ goto :EOF
         echo %%b | findstr /I /R /C:".themes.: \[">nul 2>&1 && ( set /a "numLigneModif=!cpt!" & goto :eof )
     )
 goto :eof
+
+
+::=========================::
+:: Création du fichier VBS ::
+::=========================::
+:createVbs
+    prog = "installateur.bat """ ^& chemin ^& """">> demande_chemin.vbs
+    echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^0>temp.vbs
+goto :EOF
+
+:executionVbs
+    start temp.vbs
+goto :EOF
