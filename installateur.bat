@@ -4,8 +4,6 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
-    echo '%~0'
-    goto :EOF
     if "%~1" EQU "0" (
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
@@ -38,7 +36,7 @@ setlocal EnableDelayedExpansion
             ) else if "!erreur!" EQU "2" (
                 echo execution de vbscript
                 call :createVbs
-                call :executionVbs
+                ::call :executionVbs
                 goto :EOF
             )
         )
@@ -210,8 +208,8 @@ goto :eof
 :: Création du fichier VBS ::
 ::=========================::
 :createVbs
-    prog = "installateur.bat """ ^& chemin ^& """">> demande_chemin.vbs
-    echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^0>temp.vbs
+    echo prog = "%~0 "0"">temp.vbs
+    echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^0>>temp.vbs
 goto :EOF
 
 :executionVbs
