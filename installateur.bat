@@ -216,9 +216,9 @@ goto :eof
 :: Création du fichier VBS ::
 ::=========================::
 :createVbs
-    echo MsgBox (test)>temp.vbs
+    echo MsgBox (Test, vbOKOnly, Titre)>temp.vbs
     echo prog = "%prog% 0">>temp.vbs
-    echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^0>>temp.vbs
+    echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^1>>temp.vbs
     pause
 goto :EOF
 
