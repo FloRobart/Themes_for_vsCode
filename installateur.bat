@@ -131,6 +131,7 @@ goto :EOF
 ::================================================::
 :verifExtentionGithubInstallation
     echo flag 4
+    pause
     code --list-extensions | FINDSTR /I /R /C:"^GitHub\.github\-vscode\-theme*" >nul 2>&1 && (
         echo L'extention github theme est deja installe
         set /a "verifExtentionGithubInstallation=0"
