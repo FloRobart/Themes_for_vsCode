@@ -8,9 +8,10 @@ setlocal EnableDelayedExpansion
         if exist temp.vbs (
             del temp.vbs
         )
-
+        pause
         call :demandeInstallationThemePerso
         if "!demandeInstallationThemePerso!" EQU "0" (
+            pause
             call :verifExtentionGithubInstallation
             if "!verifExtentionGithubInstallation!" EQU "0" (
                 echo copie du fichier contenant le theme...
