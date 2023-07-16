@@ -5,13 +5,13 @@
 ::======::
 setlocal EnableDelayedExpansion
     if "%~1" EQU "0" (
+        echo flag 1
         pause
-        if exist temp.vbs (
-            del temp.vbs
-        )
-        pause
+
         call :demandeInstallationThemePerso
+        echo flag 2
         if "!demandeInstallationThemePerso!" EQU "0" (
+            echo flag 3
             pause
             call :verifExtentionGithubInstallation
             if "!verifExtentionGithubInstallation!" EQU "0" (
@@ -22,6 +22,11 @@ setlocal EnableDelayedExpansion
         ) else (
             echo Le theme personnalise ne sera pas installe
         )
+
+        if exist temp.vbs (
+            del temp.vbs
+        )
+
     ) else (
         set "prog=%~0"
         call :verifVsCodeInstallation
