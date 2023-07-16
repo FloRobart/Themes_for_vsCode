@@ -5,6 +5,7 @@
 ::======::
 setlocal EnableDelayedExpansion
     if "%~1" EQU "0" (
+        pause
         if exist temp.vbs (
             del temp.vbs
         )
