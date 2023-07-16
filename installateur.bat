@@ -25,7 +25,7 @@ setlocal EnableDelayedExpansion
             echo Une erreur s'est produite lors de l'installation de VsCode
         ) else if "!erreur!" EQU "2" (
             :: Faire un script vbs
-            echo éxecution de vbscript
+            echo execution de vbscript
 
             goto :EOF
         )
