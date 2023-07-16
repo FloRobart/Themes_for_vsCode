@@ -23,6 +23,11 @@ setlocal EnableDelayedExpansion
     ) else (
         if "%erreur%" EQU "0" (
             echo Une erreur s'est produite lors de l'installation de VsCode
+        ) else if "!erreur!" EQU "2" (
+            :: Faire un script vbs
+
+
+            goto :EOF
         )
     )
     endlocal
@@ -42,9 +47,13 @@ goto :EOF
         echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de Visual Studio Code
             call :installationVsCode
-            set /a "verifVsCodeInstallation=!installationVsCode!"
+            if "!installationVsCode!" EQU "0" (
+                set /a "verifVsCodeInstallation=0"
+            ) else (
+                set /a "verifVsCodeInstallation=1"
+            )
         ) || (
-            echo Visual Studio Code ainsi que le theme ne seront pas installe
+            echo Visual Studio Code ainsi que le theme ne seront pas installes
             set /a "verifVsCodeInstallation=1"
             set /a "erreur=1"
         )
@@ -68,13 +77,16 @@ goto :EOF
         if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
             echo Visual Studio Code a ete installe avec succes
             set /a "installationVsCode=0"
+            set /a "erreur=2"
         ) else (
             echo Visual Studio Code n'a pas ete installe
             set /a "installationVsCode=1"
+            set /a "erreur=1"
         )
     ) || (
         echo Une erreur s'est produite lors de l'installation de Visual Studio Code
         set /a "installationVsCode=1"
+        set /a "erreur=0"
     )
 goto :EOF
 
