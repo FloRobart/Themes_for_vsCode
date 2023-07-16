@@ -214,7 +214,7 @@ goto :eof
 ::=========================::
 :createVbs
     echo %prog%
-    echo prog = "%prog% "0"">temp.vbs
+    echo prog = "%prog% 0">temp.vbs
     echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^0>>temp.vbs
     pause
 goto :EOF
