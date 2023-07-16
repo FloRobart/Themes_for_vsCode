@@ -19,7 +19,7 @@ setlocal EnableDelayedExpansion
                 call :copieFichierTheme
                 pause
             )
-            echo flag 6
+            echo flag 8
             pause
         ) else (
             echo Le theme personnalise ne sera pas installe
@@ -135,9 +135,13 @@ goto :EOF
     code --list-extensions | FINDSTR /I /R /C:"^GitHub\.github\-vscode\-theme*" >nul 2>&1 && (
         echo L'extention github theme est deja installe
         set /a "verifExtentionGithubInstallation=0"
+        echo flag 5
+        pause
     ) || (
         set /p "reponse=L'extention Github theme n'est pas installe et est obligatoire pour installe le theme personnalise. Voulez-vous installer l'extention ? (y/n) : "
 
+        echo flag 6
+        pause
         echo !reponse! | FINDSTR /I /R /C:"^y" && (
             echo Installation de l'extention github theme...
             call :installationExtentionGithubTheme
@@ -153,7 +157,7 @@ goto :EOF
             set /a "verifExtentionGithubInstallation=1"
         )
     )
-    echo flag 5
+    echo flag 7
     pause
 goto :EOF
 
