@@ -25,7 +25,7 @@ setlocal EnableDelayedExpansion
             echo Une erreur s'est produite lors de l'installation de VsCode
         ) else if "!erreur!" EQU "2" (
             :: Faire un script vbs
-
+            echo éxecution de vbscript
 
             goto :EOF
         )
@@ -47,11 +47,8 @@ goto :EOF
         echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de Visual Studio Code
             call :installationVsCode
-            if "!installationVsCode!" EQU "0" (
-                set /a "verifVsCodeInstallation=0"
-            ) else (
-                set /a "verifVsCodeInstallation=1"
-            )
+            set /a "verifVsCodeInstallation=!installationVsCode!"
+            echo verifVsCodeInstallation '!verifVsCodeInstallation!'
         ) || (
             echo Visual Studio Code ainsi que le theme ne seront pas installes
             set /a "verifVsCodeInstallation=1"
@@ -84,7 +81,6 @@ goto :EOF
             set /a "erreur=1"
         )
     ) || (
-        echo Une erreur s'est produite lors de l'installation de Visual Studio Code
         set /a "installationVsCode=1"
         set /a "erreur=0"
     )
