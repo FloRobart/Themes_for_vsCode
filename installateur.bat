@@ -4,6 +4,7 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
+    echo param '%~1'
     if "%~1" EQU "0" (
         pause
         if exist temp.vbs (
