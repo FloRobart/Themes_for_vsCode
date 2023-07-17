@@ -58,21 +58,29 @@ goto :EOF
 :: Installation de vscode ::
 ::========================::
 :installationVsCode
-    echo Une fois le telechargement termine, fermer la fenetre du navigateur pour continuer l'installation
+    echo Une fois le telechargement du fichier termine, fermer la fenetre du navigateur pour continuer l'installation
     start /wait https://code.visualstudio.com/docs/?dv=win && (
         if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
             rmdir /S /Q "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code"
         )
 
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
-        start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
 
-        if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
-            echo Visual Studio Code a ete installe avec succes
-            set /a "installationVsCode=1"
-            set /a "erreur=2"
+        if exist "%HomeDrive%%HomePath%\Downloads\!file!" (
+            start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
+
+            if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
+                echo Visual Studio Code a ete installe avec succes
+                set /a "installationVsCode=1"
+                set /a "erreur=2"
+            ) else (
+                echo Visual Studio Code n'a pas ete installe
+                set /a "installationVsCode=1"
+                set /a "erreur=1"
+            )
         ) else (
-            echo Visual Studio Code n'a pas ete installe
+            echo Le fichier d'installation de Visual Studio Code n'a pas ete trouve
+            pause >nul
             set /a "installationVsCode=1"
             set /a "erreur=1"
         )
