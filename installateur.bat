@@ -66,7 +66,7 @@ goto :EOF
 
         for /f "USEBACKQ tokens=*" %%a in (`dir /B /O-D "%HomeDrive%%HomePath%\Downloads\VSCodeUserSetup-x64-*.exe"`) do set "file=%%a"
 
-        if exist "%HomeDrive%%HomePath%\Downloads\!file!" (
+        if "!file!" NEQ "" (
             start /wait /D "%HomeDrive%%HomePath%\Downloads\" !file!
 
             if exist "%HomeDrive%%HomePath%\AppData\Local\Programs\Microsoft VS Code" (
