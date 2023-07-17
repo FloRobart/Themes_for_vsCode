@@ -4,56 +4,26 @@
 :: Main ::
 ::======::
 setlocal EnableDelayedExpansion
-    if "%~1" EQU "0" (
-        echo flag 1
-        pause
-
+    call :verifVsCodeInstallation
+    if "!verifVsCodeInstallation!" EQU "0" (
         call :demandeInstallationThemePerso
-        echo flag 2
         if "!demandeInstallationThemePerso!" EQU "0" (
-            echo flag 3
-            pause
             call :verifExtentionGithubInstallation
             if "!verifExtentionGithubInstallation!" EQU "0" (
                 echo copie du fichier contenant le theme...
                 call :copieFichierTheme
-                pause
+                echo Le theme personnalise a ete installe avec succes
+                pause >nul
             )
-            echo flag 8
-            pause
         ) else (
             echo Le theme personnalise ne sera pas installe
-            pause
         )
-
-        if exist temp.vbs (
-            del temp.vbs
-        )
-
     ) else (
-        set "prog=%~0"
-        call :verifVsCodeInstallation
-        if "!verifVsCodeInstallation!" EQU "0" (
-            call :demandeInstallationThemePerso
-            if "!demandeInstallationThemePerso!" EQU "0" (
-                call :verifExtentionGithubInstallation
-                if "!verifExtentionGithubInstallation!" EQU "0" (
-                    echo copie du fichier contenant le theme...
-                    call :copieFichierTheme
-                    pause
-                )
-            ) else (
-                echo Le theme personnalise ne sera pas installe
-            )
-        ) else (
-            if "%erreur%" EQU "0" (
-                echo Une erreur s'est produite lors de l'installation de VsCode
-            ) else if "!erreur!" EQU "2" (
-                echo execution de vbscript
-                call :createVbs
-                call :executionVbs
-                exit /b 0
-            )
+        if "%erreur%" EQU "0" (
+            echo Une erreur s'est produite lors de l'installation de VsCode
+        ) else if "!erreur!" EQU "2" (
+            echo Veuillez relancer le script pour installer le theme personnalise
+            pause
         )
     )
     endlocal
@@ -130,18 +100,12 @@ goto :EOF
 :: Vérification de l'installation de github thème ::
 ::================================================::
 :verifExtentionGithubInstallation
-    echo flag 4
-    pause
     code --list-extensions | FINDSTR /I /R /C:"^GitHub\.github\-vscode\-theme*" >nul 2>&1 & pause && (
         echo L'extention github theme est deja installe
         set /a "verifExtentionGithubInstallation=0"
-        echo flag 5
-        pause
     ) || (
         set /p "reponse=L'extention Github theme n'est pas installe et est obligatoire pour installe le theme personnalise. Voulez-vous installer l'extention ? (y/n) : "
 
-        echo flag 6
-        pause
         echo !reponse! | FINDSTR /I /R /C:"^y" && (
             echo Installation de l'extention github theme...
             call :installationExtentionGithubTheme
@@ -157,8 +121,6 @@ goto :EOF
             set /a "verifExtentionGithubInstallation=1"
         )
     )
-    echo flag 7
-    pause
 goto :EOF
 
 
@@ -225,16 +187,3 @@ goto :EOF
         echo %%b | findstr /I /R /C:".themes.: \[">nul 2>&1 && ( set /a "numLigneModif=!cpt!" & goto :eof )
     )
 goto :eof
-
-
-::=========================::
-:: Création du fichier VBS ::
-::=========================::
-:createVbs
-    echo prog = "%prog% 0">temp.vbs
-    echo WScript.CreateObject ^("Wscript.shell"^).Run^(prog^), ^1>>temp.vbs
-goto :EOF
-
-:executionVbs
-    start temp.vbs
-goto :EOF
