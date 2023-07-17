@@ -12,8 +12,6 @@ setlocal EnableDelayedExpansion
             if "!verifExtentionGithubInstallation!" EQU "0" (
                 echo copie du fichier contenant le theme...
                 call :copieFichierTheme
-                echo Le theme personnalise a ete installe avec succes
-                pause >nul
             )
         ) else (
             echo Le theme personnalise ne sera pas installe
@@ -153,6 +151,7 @@ goto :EOF
     if "!erreur!" NEQ "1" (
         echo Le theme personnalise a ete installe avec succes
         echo Vous pouvez fermer cette fenetre.
+        pause >nul
     )
 goto :EOF
 
