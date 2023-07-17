@@ -38,7 +38,7 @@ goto :EOF
     ) || (
         set /p "reponse=Visual Studio Code n'est pas installe, Voulez-vous l'installer ? (y/n) : "
 
-        echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
+        echo !reponse! >nul 2>&1 | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de Visual Studio Code
             call :installationVsCode
             set /a "verifVsCodeInstallation=!installationVsCode!"
