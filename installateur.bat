@@ -15,13 +15,15 @@ setlocal EnableDelayedExpansion
             )
         ) else (
             echo Le theme personnalise ne sera pas installe
+            pause >nul
         )
     ) else (
         if "%erreur%" EQU "0" (
-            echo Une erreur s'est produite lors de l'installation de VsCode
+            echo Une erreur s'est produite lors de l'installation de Visual Studio Code
+            pause >nul
         ) else if "!erreur!" EQU "2" (
             echo Veuillez relancer le script pour installer le theme personnalise
-            pause
+            pause >nul
         )
     )
     endlocal
@@ -44,6 +46,7 @@ goto :EOF
             set /a "verifVsCodeInstallation=!installationVsCode!"
         ) || (
             echo Visual Studio Code ainsi que le theme ne seront pas installes
+            pause >nul
             set /a "verifVsCodeInstallation=1"
             set /a "erreur=1"
         )
