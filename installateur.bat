@@ -116,7 +116,7 @@ goto :EOF
     ) || (
         set /p "reponse=L'extention Github theme n'est pas installe et est obligatoire pour installe le theme personnalise. Voulez-vous installer l'extention ? (y/n) : "
 
-        echo !reponse! | FINDSTR /I /R /C:"^y" && (
+        echo !reponse! | FINDSTR /I /R /C:"^y" >nul 2>&1 && (
             echo Installation de l'extention github theme...
             call :installationExtentionGithubTheme
             if "!installationExtentionGithubTheme!" EQU "0" (
