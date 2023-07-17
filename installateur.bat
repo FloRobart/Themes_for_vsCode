@@ -14,15 +14,15 @@ setlocal EnableDelayedExpansion
                 call :copieFichierTheme
             )
         ) else (
-            echo Le theme personnalise ne sera pas installe
+            echo Le theme personnalise ne sera pas installe, appuyer sur une touche pour quitter...
             pause >nul
         )
     ) else (
         if "%erreur%" EQU "0" (
-            echo Une erreur s'est produite lors de l'installation de Visual Studio Code
+            echo Une erreur s'est produite lors de l'installation de Visual Studio Code, appuyer sur une touche pour quitter...
             pause >nul
         ) else if "!erreur!" EQU "2" (
-            echo Veuillez relancer le script pour installer le theme personnalise
+            echo Veuillez relancer le script pour installer le theme personnalise, appuyer sur une touche pour quitter...
             pause >nul
         )
     )
@@ -45,7 +45,7 @@ goto :EOF
             call :installationVsCode
             set /a "verifVsCodeInstallation=!installationVsCode!"
         ) || (
-            echo Visual Studio Code ainsi que le theme ne seront pas installes
+            echo Visual Studio Code ainsi que le theme ne seront pas installes, appuyer sur une touche pour quitter...
             pause >nul
             set /a "verifVsCodeInstallation=1"
             set /a "erreur=1"
@@ -79,7 +79,7 @@ goto :EOF
                 set /a "erreur=1"
             )
         ) else (
-            echo Le fichier d'installation de Visual Studio Code n'a pas ete trouve
+            echo Le fichier d'installation de Visual Studio Code n'a pas ete trouve, appuyer sur une touche pour quitter...
             pause >nul
             set /a "installationVsCode=1"
             set /a "erreur=1"
@@ -160,8 +160,7 @@ goto :EOF
     )
 
     if "!erreur!" NEQ "1" (
-        echo Le theme personnalise a ete installe avec succes
-        echo Vous pouvez fermer cette fenetre.
+        echo Le theme personnalise a ete installe avec succes, appuyer sur une touche pour quitter...
         pause >nul
     )
 goto :EOF
