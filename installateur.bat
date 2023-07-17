@@ -74,7 +74,8 @@ goto :EOF
                 set /a "installationVsCode=1"
                 set /a "erreur=2"
             ) else (
-                echo Visual Studio Code n'a pas ete installe
+                echo Visual Studio Code n'a pas ete installe, appuyer sur une touche pour quitter...
+                pause >nul
                 set /a "installationVsCode=1"
                 set /a "erreur=1"
             )
