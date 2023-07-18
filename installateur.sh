@@ -22,7 +22,7 @@ function verifVsCodeInstallation()
 #========================#
 function installationVsCode()
 {
-    sudo apt update && { sudo snap install code --classic && { echo 'VsCode à été installé avec succès' ; return 0 ; } || { echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode' ; return 1 ; } } || { echo 'Une erreur s'\''est produite lors de l'\''update du gestionnaire de paquet apt' ; return 1 ; }
+    sudo snap install code --classic && { echo 'VsCode à été installé avec succès' ; return 0 ; } || { echo 'Une erreur s'\''est produite lors de l'\''installation de VsCode' ; return 1 ; }
 }
 
 
