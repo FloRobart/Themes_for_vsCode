@@ -2,11 +2,32 @@
 
 ## Prévisualisation
 
-## Installation
+### Règle générale
 
-### Linux
+Ces règles s'appliquer à tous les langages.
 
-#### Avec le script d'installation
+- Fond : `noir`
+- Mot clé et type prémitif : `Rouge`
+- Commentaire : `Vert`
+- Texte simple et ponctuation : `Blanc`
+- Fonction : `Violet`
+- Variable : `Jaune`
+- Constante et texte entre quote : `Bleu`
+- Type personnalisé / objet : `Orange`
+- Erreur : `Soulignement rouge`
+
+### Exemple de code java et shell
+
+![Préview java](./Images_readme/exemple_code_java.png)
+![Préview shell](./Images_readme/exemple_code_shell.png)
+
+## Prérequis
+
+- Disposer des droits administrateurs si java n'est pas installer sur votre machine
+
+## Installation sur Linux (Tester sur Ubuntu 22.04 LTS)
+
+### Avec le script d'installation
 
 - Cloner le repertoire Github :
 
@@ -26,13 +47,15 @@
   ./installateur.sh
   ```
 
-- Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de vscode
+- Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
 
 #### Manuellement
 
-- Assurez vous d'avoir installé l'extension Github thème qui à comme ID :
+- Assurez vous d'avoir installé l'extension '`Github thème`' qui à comme ID :
 
-> GitHub.github-vscode-theme
+  > GitHub.github-vscode-theme
+
+  ![image extention github theme](./Images_readme/extention_github_theme.png)
 
 - Cloner le repertoire Github :
 
@@ -87,9 +110,9 @@
   }
   ```
 
-### Windows
+## Installation sur Windows (Tester sur Windows 11)
 
-#### Avec le script d'installation
+### Avec le script d'installation
 
 - Cloner le repertoire Github :
 
@@ -97,10 +120,65 @@
   git clone https://github.com/FloRobart/Themes_for_vsCode.git
   ```
 
-- Executer la script :
+- Executer la script '`installateur.bat`' en double cliquant dessus
 
-  ```batch
-  ./installateur.sh
+### Manuellement
+
+- Assurez vous d'avoir installé l'extension '`Github thème`' qui à comme ID :
+
+  > GitHub.github-vscode-theme
+
+  ![image extention github theme](./Images_readme/extention_github_theme.png)
+
+- Cloner le repertoire Github :
+
+  ```shell
+  git clone https://github.com/FloRobart/Themes_for_vsCode.git
   ```
 
-#### Manuellement
+- Copier le thème dans le répertoire des thèmes de vscode :
+
+  ```batch
+  xcopy "path\to\Themes_for_vsCode\Themes\dark-perso.json" "C:\Users\%USERNAME%\.vscode\extensions\github.github-vscode-theme-< version >\themes\dark-perso.json"
+  ```
+
+- Modifier le fichier `package.json` pour y ajouter le nouveau thème
+
+    Ajouter le texte suivant comme dans l'exemple si dessous
+
+  ```json
+  ,
+  {
+      "label": "GitHub Dark Perso",
+      "uiTheme": "vs-dark",
+      "path": "./themes/dark-perso.json"
+  }
+  ```
+
+- Exemple
+
+  ```json
+  {
+      ...
+  
+      "contributes": {
+          "themes": [
+  
+              ...
+  
+              {
+                  "label": "GitHub Dark",
+                  "uiTheme": "vs-dark",
+                  "path": "./themes/dark.json"
+              },
+              {
+                  "label": "GitHub Dark Perso",
+                  "uiTheme": "vs-dark",
+                  "path": "./themes/dark-perso.json"
+              }
+          ]
+      },
+  
+      ...
+  }
+  ```
