@@ -47,7 +47,10 @@ Ces règles s'appliquer à tous les langages.
   ./installateur.sh
   ```
 
+- Relancer Visual Studio Code
 - Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
+- Une fois le script exécuter, vous pouvez supprimer le repertoire `Themes_for_vsCode` cloner précédement
+
 
 #### Manuellement
 
@@ -110,6 +113,10 @@ Ces règles s'appliquer à tous les langages.
   }
   ```
 
+- Relancer Visual Studio Code
+- Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
+- Une fois le thème choisi, vous pouvez supprimer le repertoire `Themes_for_vsCode` cloner précédement
+
 ## Installation sur Windows (Tester sur Windows 11)
 
 ### Avec le script d'installation
@@ -121,6 +128,9 @@ Ces règles s'appliquer à tous les langages.
   ```
 
 - Executer la script '`installateur.bat`' en double cliquant dessus
+- Relancer Visual Studio Code
+- Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
+- Une fois le script exécuter, vous pouvez supprimer le repertoire `Themes_for_vsCode` cloner précédement
 
 ### Manuellement
 
@@ -182,3 +192,7 @@ Ces règles s'appliquer à tous les langages.
       ...
   }
   ```
+
+- Relancer Visual Studio Code
+- Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
+- Une fois le thème choisi, vous pouvez supprimer le repertoire `Themes_for_vsCode` cloner précédement
