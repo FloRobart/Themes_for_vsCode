@@ -9,7 +9,7 @@ function verifVsCodeInstallation()
     then
         echo 'Visual Studio Code n'\''est pas installé, Voulez-vous l'\''installer ? (y/n)'
         read reponse
-        [[ ${reponse} =~ ^y(es)?$ ]] && { installationVsCode || { erreur=0 ; return 1 ; }; } || { echo 'Visual studio Code ne sera pas installé' ; erreur=1 ; return 1 ; }
+        [[ ${reponse} =~ ^[yY]([eE][sS])?$ ]] && { installationVsCode || { erreur=0 ; return 1 ; }; } || { echo 'Visual studio Code ne sera pas installé' ; erreur=1 ; return 1 ; }
     else
         echo 'Visual studio Code est déjà installé'
     fi
@@ -48,7 +48,7 @@ function verifExtentionGithubInstallation()
     then
         echo 'L'\''extention Github thème n'\''est pas installé et est obligatoire pour installé le thème personnalisé. Voulez-vous installer l'\''extention ? (y/n)'
         read reponse
-        if [[ ${reponse} =~ ^y(es)?$ ]]
+        if [[ ${reponse} =~ ^[yY]([eE][sS])?$ ]]
         then
             echo 'Installation d'\''extention Github thème...'
             installationExtentionGithubTheme && { echo 'Le thème Github à été installé avec succès' ; return 0 ; } || { echo 'Une erreur est survenue lors de l'\''installation de l'\''extention Github thème' ; return 1 ; }
