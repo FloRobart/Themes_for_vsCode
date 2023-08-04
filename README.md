@@ -1,4 +1,12 @@
-# Thème sombre avec un fond noir rgb(0,0,0) pour Visual Studio Code
+# Thème sombre AMOLED avec un fond noir rgb(0,0,0) pour Visual Studio Code
+
+## Description
+
+Ce thème est basé sur les thèmes de l'extention GitHub Theme de Visual Studio Code.
+
+Il a été créer pour les écrans AMOLED afin de réduire la consommation d'énergie, pour être plus agréable à l'oeil et pour avoir des commentaires bien plus visible que la plupart des autres thèmes.
+
+Si les couleurs ne vous conviennent pas, vous pouvez les modifier dans le fichier `dark-perso.json` puis utiliser le script d'installation pour mettre à jour le thème sur votre IDE.
 
 ## Prévisualisation
 
@@ -13,7 +21,7 @@ Ces règles s'appliquer à tous les langages.
 - Fonction : `Violet`
 - Variable : `Jaune`
 - Constante et texte entre quote : `Bleu`
-- Type personnalisé / objet : `Orange`
+- Type personnalisé / objet / commande : `Orange`
 - Erreur : `Soulignement rouge`
 
 ### Exemple de code java et shell
