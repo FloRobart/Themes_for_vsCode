@@ -59,7 +59,6 @@ Ces règles s'appliquer à tous les langages.
 - Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
 - Une fois le script exécuter, vous pouvez supprimer le repertoire `Themes_for_vsCode` cloner précédement
 
-
 #### Manuellement
 
 - Assurez vous d'avoir installé l'extension '`Github thème`' qui à comme ID :
