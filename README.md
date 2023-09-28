@@ -33,7 +33,7 @@ Ces règles s'appliquer à tous les langages.
 
 - Disposer des droits administrateurs si java n'est pas installer sur votre machine
 
-## Installation sur Linux (Tester sur Ubuntu 22.04 LTS)
+## Installation sur Linux (Tester sur Ubuntu 20.04, 22.04 LTS et Debian 12)
 
 ### Avec le script d'installation
 
