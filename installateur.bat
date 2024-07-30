@@ -1,5 +1,8 @@
 @echo off
 
+REM Ce fichier fait partie du projet Thème for vscode
+REM Copyright (C) 2024 Floris Robart florobart.github@gmail.com
+
 ::======::
 :: Main ::
 ::======::

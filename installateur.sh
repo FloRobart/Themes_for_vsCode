@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Ce fichier fait partie du projet Thème for vscode
+# Copyright (C) 2024 Floris Robart <florobart.github@gmail.com>
+
 #==========================================#
 # Vérification de l'installation de vscode #
 #==========================================#
