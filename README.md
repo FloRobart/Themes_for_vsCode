@@ -203,3 +203,11 @@ Ces règles s'appliquer à tous les langages.
 - Relancer Visual Studio Code
 - Vous pouvez maintenant choisir le thème nommer `GitHub Dark Perso` dans les paramètres de l'extention Github Theme de Visual Studio Code
 - Une fois le thème choisi, vous pouvez supprimer le repertoire `Themes_for_vsCode` cloner précédement
+
+## Report de bug
+
+Si vous découvrez une erreur, quelquelle soit, cela peut êgre une faute de frappe ou d'orthographe, une erreur de calcul, une erreur de conception, un bug qui empêche le bon fonctionnement de l'application, ou tout autre problème, Merci de me le signaler par mail à l'adresse [florobart.github@gmail.com](mailto:florobart.github@gmail.com). Toutes les erreurs, quelque soit leur nature ou leur importance, seront traitées le plus rapidement possible.
+
+## Licence
+
+Account manager est un projet open-source sous licence [GNU General Public License v3.0](https://opensource.org/licenses/GPL-3.0).
