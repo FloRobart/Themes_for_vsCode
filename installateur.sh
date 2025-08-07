@@ -147,8 +147,8 @@ function retirePoint()
 function ajoutThemeInFichierConfiguration()
 {
     configTheme='\"label\": \"GitHub Dark Perso\",\n\t\t\t\t\"uiTheme\": \"vs-dark\",\n\t\t\t\t\"path\": \".\/themes\/dark-perso.json\"'
-    packageFile='/home/'"$USER"'/.vscode/extensions/'"$lastFolder"'/package.json'
-    packageFile2='/home/'"$USER"'/.vscode/extensions/'"$lastFolder"'/package2.json'
+    packageFile="$HOME"'/.vscode/extensions/'"$lastFolder"'/package.json'
+    packageFile2="$HOME"'/.vscode/extensions/'"$lastFolder"'/package2.json'
     sed "s/\"themes\": \[/\"themes\": \[\n\t\t\t{\n\t\t\t\t$configTheme\n\t\t\t},/" $packageFile > $packageFile2 && return 0 || return 1
 }
 
