@@ -31,9 +31,9 @@ Ces règles s'appliquer à tous les langages.
 
 ## Prérequis
 
-- Disposer des droits administrateurs si java n'est pas installer sur votre machine
+- Avoir installé Visual Studio Code
 
-## Installation sur Linux (Tester sur Ubuntu 20.04, 22.04 LTS, Ubuntu 23.04 et Debian 12)
+## Installation sur Linux (Tester sur Ubuntu 20.04 et ultérieur et sur Debian 12)
 
 ### Avec le script d'installation
 
@@ -211,3 +211,4 @@ Si vous découvrez une erreur, quelquelle soit, cela peut êgre une faute de fra
 ## Licence
 
 Account manager est un projet open-source sous licence [GNU General Public License v3.0](https://opensource.org/licenses/GPL-3.0).
+
